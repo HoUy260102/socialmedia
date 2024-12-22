@@ -3,13 +3,18 @@ package com.javaweb.controller.web;
 import com.javaweb.converter.UserConverter;
 import com.javaweb.entity.FollowingEntity;
 import com.javaweb.entity.UserEntity;
+import com.javaweb.model.dto.MyUserDetail;
 import com.javaweb.model.dto.UserDTO;
 import com.javaweb.model.dto.UserSearchResponseDTO;
 import com.javaweb.service.FollowerService;
 import com.javaweb.service.FollowingService;
+import com.javaweb.service.Impl.CustomUserDetailService;
 import com.javaweb.service.PostService;
 import com.javaweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +42,11 @@ public class HomeController {
 	private FollowerService followerService;
 	@Autowired
 	private PostService postService;
+	@RequestMapping(value = "/admin/",method = RequestMethod.GET)
+	public String admin() {
+		System.out.println("hello");
+		return "Hello";
+	}
 	@GetMapping(value = "/myprofile")
 	public ModelAndView myProfile(HttpSession session) {
 		ModelAndView mav = new ModelAndView("web/myprofile");
@@ -65,8 +75,20 @@ public class HomeController {
 		return mav;
 	}
 	@GetMapping(value = "/login")
-	public ModelAndView login(Model model) {
+	public ModelAndView login(Model model,@RequestParam(name = "mes", required = false) String mes, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		ModelAndView mav = new ModelAndView("login");
+		if (mes!=null&&mes.equals("0")) {
+			mav.addObject("mes","Mật khẩu hoặc tài khoản không chính xác");
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			System.out.println(auth);
+		}
+		else if (mes!=null&&mes.equals("1")) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			MyUserDetail myUserDetail =(MyUserDetail) auth.getPrincipal();
+			HttpSession se = request.getSession();
+			se.setAttribute("user",myUserDetail.getUserDTO());
+			response.sendRedirect("/");
+		}
 		return mav;
 	}
 	@GetMapping(value = "/signup")
@@ -150,8 +172,8 @@ public class HomeController {
 		se.setAttribute("user",userConverter.toUserDTO(user));
 		response.sendRedirect("/");
 	}
-	@PostMapping(value = "/signup")
-	public void signup(@RequestParam(value = "firstName", required = false) String firstName,
+	@PostMapping(value = "/signupcheck")
+	public void signupcheck(@RequestParam(value = "firstName", required = false) String firstName,
 					   @RequestParam(value = "lastName", required = false) String lastName,
 					   @RequestParam(value = "email", required = false) String email,
 					   @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
@@ -194,7 +216,11 @@ public class HomeController {
 		response.sendRedirect("/");
 	}
 	@GetMapping("/logout")
-	public void logout(HttpSession session, HttpServletResponse response) throws Exception {
+	public void logout(HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
 		session.removeAttribute("user");
 		response.sendRedirect("login");
 	}

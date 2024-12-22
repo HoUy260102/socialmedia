@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/common/taglib.jsp"%>	
-
+<%@include file="/WEB-INF/common/taglib.jsp"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
     <title>Login</title>
@@ -37,16 +37,16 @@
                         </div>
                     </div>
                 </div>
-                <form action="/check-login" method="POST">
+                <form:form action="/j_spring_security_check" method="post">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="email" value="${email}" placeholder="Email Address">
+                                <input type="text" class="form-control" name="username" placeholder="Email Address">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="password" class="form-control" name="password" value="${password}" placeholder="Password">
+                                <input type="password" class="form-control" name="password" placeholder="Password">
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
@@ -71,7 +71,7 @@
                             <span class="go-login">Not yet a member? <a href="/signup">Sign Up</a></span>
                         </div>
                     </div>
-                </form>
+                </form:form>
             </div>
         </div>
         <div class="col-md-6 auth-bg-image d-flex justify-content-center align-items-center">

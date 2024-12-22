@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <form action="/signup" method="POST" id="formsignup" class="pt-5">
+            <form action="/signupcheck" method="POST" id="formsignup" class="pt-5">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
