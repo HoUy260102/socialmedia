@@ -6,6 +6,7 @@ import com.javaweb.entity.UserEntity;
 import com.javaweb.model.dto.MyUserDetail;
 import com.javaweb.model.dto.UserDTO;
 import com.javaweb.model.dto.UserSearchResponseDTO;
+import com.javaweb.security.utils.SecurityUtils;
 import com.javaweb.service.FollowerService;
 import com.javaweb.service.FollowingService;
 import com.javaweb.service.Impl.CustomUserDetailService;
@@ -75,19 +76,20 @@ public class HomeController {
 		return mav;
 	}
 	@GetMapping(value = "/login")
-	public ModelAndView login(Model model,@RequestParam(name = "mes", required = false) String mes, HttpServletResponse response, HttpServletRequest request) throws Exception{
+	public ModelAndView login(Model model,@RequestParam(name = "mes", required = false) String mes, HttpServletResponse response, HttpServletRequest request, HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView("login");
 		if (mes!=null&&mes.equals("0")) {
 			mav.addObject("mes","Mật khẩu hoặc tài khoản không chính xác");
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			System.out.println(auth);
 		}
 		else if (mes!=null&&mes.equals("1")) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			List<String> roles = SecurityUtils.getAuthorities();
 			MyUserDetail myUserDetail =(MyUserDetail) auth.getPrincipal();
-			HttpSession se = request.getSession();
-			se.setAttribute("user",myUserDetail.getUserDTO());
-			response.sendRedirect("/");
+			session.setAttribute("user",myUserDetail.getUserDTO());
+			session.removeAttribute("username");
+			if (roles.contains("ROLE_USER")) {
+				response.sendRedirect("/");
+			}
 		}
 		return mav;
 	}

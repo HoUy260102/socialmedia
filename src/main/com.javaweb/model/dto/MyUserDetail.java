@@ -20,4 +20,5 @@ public class MyUserDetail extends User {
     public void setUserDTO(UserDTO userDTO) {
         this.userDTO = userDTO;
     }
+
 }

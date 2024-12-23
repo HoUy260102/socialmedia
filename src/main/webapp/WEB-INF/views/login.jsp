@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="username" placeholder="Email Address">
+                                <input type="text" class="form-control" name="username" value="${username}" placeholder="Email Address">
                             </div>
                         </div>
                         <div class="col-md-12">
