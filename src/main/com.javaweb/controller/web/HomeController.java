@@ -121,6 +121,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("/web/following");
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
 		mav.addObject("listFollowing", followingService.getFollowingPage(userDTO.getId(),1L));
+		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(((UserDTO)session.getAttribute("user")).getId(),0L));
+		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(((UserDTO)session.getAttribute("user")).getId(),0));
 		return mav;
 	}
 	@GetMapping("/follower")
@@ -128,6 +130,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("/web/follower");
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
 		mav.addObject("listFollower", followerService.getFollowerPage(userDTO.getId(),1L));
+		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(((UserDTO)session.getAttribute("user")).getId(),0L));
+		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(((UserDTO)session.getAttribute("user")).getId(),0));
 		return mav;
 	}
 	@GetMapping("/searchuser")
@@ -137,6 +141,8 @@ public class HomeController {
 		List<UserSearchResponseDTO> result = userService.findAllByKey(key,userDTO.getId());
 		mav.addObject("keyid",key);
 		mav.addObject("listSearchUser", result);
+		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(((UserDTO)session.getAttribute("user")).getId(),0L));
+		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(((UserDTO)session.getAttribute("user")).getId(),0));
 		return mav;
 	}
 	@PostMapping(value = "/edit-profileapply")

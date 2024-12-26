@@ -66,7 +66,7 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav mr-5 flex-row" id="main_menu">
-                        <a class="navbar-brand nav-item mr-lg-5" href="index.html"><img
+                        <a class="navbar-brand nav-item mr-lg-5" href="/"><img
                                 src="/assets/images/logo-64x64.png" width="40" height="40" class="mr-3" alt="Logo"></a>
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <form action="/searchuser" method="get" class="w-30 mx-2 my-auto d-inline form-inline mr-5 search-form">
@@ -431,7 +431,7 @@
                                 <h6>Home</h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center sd-active">
-                                <a href="index.html" class="sidebar-item"><img
+                                <a href="/" class="sidebar-item"><img
                                         src="/assets/images/icons/left-sidebar/newsfeed.png" alt="newsfeed"> News
                                     Feed</a>
                                 <a href="#" class="newsfeedListicon"><i class='bx bx-dots-horizontal-rounded'></i></a>

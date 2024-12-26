@@ -298,7 +298,7 @@
                             </div>
                         </li>
                         <li class="nav-item s-nav">
-                            <a href="profile.html" class="nav-link nav-links">
+                            <a href="/myprofile" class="nav-link nav-links">
                                 <div class="menu-user-image">
                                     <img src="${user.linkImgAvatar}" class="menu-user-img ml-1"
                                          alt="Menu Image">

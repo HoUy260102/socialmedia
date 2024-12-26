@@ -66,7 +66,7 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav mr-5 flex-row" id="main_menu">
-                        <a class="navbar-brand nav-item mr-lg-5" href="index.html"><img
+                        <a class="navbar-brand nav-item mr-lg-5" href="/"><img
                                 src="assets/images/logo-64x64.png" width="40" height="40" class="mr-3" alt="Logo"></a>
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <form action="/searchuser" method="get" class="w-30 mx-2 my-auto d-inline form-inline mr-5 search-form">
