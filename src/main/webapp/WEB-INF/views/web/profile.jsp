@@ -22,10 +22,15 @@
     <link href="/assets/css/profile.css" rel="stylesheet">
     <link href="/assets/css/media.css" rel="stylesheet">
     <script src="/assets/js/load.js" type="text/javascript"></script>
+    <style>
+        .likeIcon{
+            color: #007bff;
+        }
+    </style>
 </head>
 <body class="profile">
 <div class="container-fluid newsfeed d-flex" id="wrapper">
-    <div class="row newsfeed-size">
+    <div class="row newsfeed-size" style="width: 100%">
         <div class="col-md-12 p-0">
             <nav id="navbar-main" class="navbar navbar-expand-lg shadow-sm sticky-top">
                 <div class="w-100 justify-content-md-center">
@@ -235,13 +240,13 @@
                                data-placement="bottom" data-title="Notifications" role="button" aria-haspopup="true"
                                aria-expanded="false">
                                 <img src="/assets/images/icons/navbar/notification.png" class="notification-bell"
-                                     alt="navbar icon"> <span class="badge badge-pill badge-primary">3</span>
+                                     alt="navbar icon"> <span class="badge badge-pill badge-primary">${notificationCnt}</span>
                             </a>
-                            <ul class="dropdown-menu notify-drop dropdown-menu-right nav-drop">
+                            <ul class="dropdown-menu notify-drop dropdown-menu-right nav-drop shadow-sm">
                                 <div class="notify-drop-title">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-6 fs-8">Notifications <span
-                                                class="badge badge-pill badge-primary ml-2">3</span></div>
+                                                class="badge badge-pill badge-primary ml-2">${notificationCnt}</span></div>
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-right">
                                             <a href="#" class="notify-right-icon">
                                                 Mark All as Read
@@ -252,120 +257,27 @@
                                 <!-- end notify title -->
                                 <!-- notify content -->
                                 <div class="drop-content">
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="/assets/images/users/user-10.png"
-                                                     alt="notification user image">
+                                    <c:forEach items="${listNotification.content}" var="item">
+                                        <li ${item.seen==0?'style="background-color:#f2f4f5;cursor:pointer"':'style="cursor:pointer"'} onclick="redir(`${item.link}`, ${item.id})">
+                                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                                <div class="notify-img">
+                                                    <img src="${item.linkImgAvatar}"
+                                                         alt="notification user image">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Sean</a> <span
-                                                class="notification-type">replied to your comment on a post in </span><a
-                                                href="#" class="notification-for">PHP</a>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i
-                                                        class='bx bxs-group'></i></span> 3h
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="/assets/images/users/user-7.png" alt="notification user image">
+                                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                                <a href="#" class="notification-user">${item.firstName} ${item.lastName}</a> <span
+                                                    class="notification-type">
+                                                     <c:if test="${item.type==0}">đã theo dõi bạn</c:if>
+                                                     <c:if test="${item.type==1}">đã bình luận vào bài viết của bạn </c:if>
+                                                     <c:if test="${item.type==2}">đã thích bài viết của bạn</c:if>
+                                                     </span>
+                                                <div href="#" class="notify-right-icon">
+                                                    <i class='bx bx-radio-circle-marked'></i>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Kimberly</a> <span
-                                                class="notification-type">likes your comment "I would really... </span>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i class='bx bxs-like'></i></span>
-                                                7h
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="/assets/images/users/user-8.png" alt="notification user image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <span class="notification-type">10 people saw your story before it disappeared. See who saw it.</span>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i
-                                                        class='bx bx-images'></i></span> 23h
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="/assets/images/users/user-11.png"
-                                                     alt="notification user image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Michelle</a> <span
-                                                class="notification-type">posted in </span><a href="#"
-                                                                                              class="notification-for">Argon
-                                            Social Design System</a>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i
-                                                        class='bx bxs-quote-right'></i></span> 1d
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="/assets/images/users/user-5.png" alt="notification user image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Karen</a> <span
-                                                class="notification-type">likes your comment "Sure, here... </span>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i class='bx bxs-like'></i></span>
-                                                2d
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="/assets/images/users/user-12.png"
-                                                     alt="notification user image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Irwin</a> <span
-                                                class="notification-type">posted in </span><a href="#"
-                                                                                              class="notification-for">Themeforest</a>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i
-                                                        class='bx bxs-quote-right'></i></span> 3d
-                                            </p>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    </c:forEach>
                                 </div>
                                 <div class="notify-drop-footer text-center">
                                     <a href="#">See More</a>
@@ -486,11 +398,11 @@
                                     </div>
                                     <div class="intro-item d-flex justify-content-between align-items-center">
                                         <p class="intro-title text-muted"><i class='bx bx-briefcase text-primary'></i>
-                                            ${user.work}</p>
+                                            ${following.work}</p>
                                     </div>
                                     <div class="intro-item d-flex justify-content-between align-items-center">
                                         <p class="intro-title text-muted"><i class='bx bx-map text-primary'></i> Lives
-                                            in <a href="#">${user.live}</a></p>
+                                            in <a href="#">${following.live}</a></p>
                                     </div>
                                     <div class="intro-item d-flex justify-content-between align-items-center">
                                         <p class="intro-title text-muted"><i class='bx bx-time text-primary'></i> Last
@@ -573,160 +485,46 @@
                                                 <h6 class="timeline-title">Posts</h6>
                                             </div>
                                         </div>
-                                        <div class="post border-bottom p-3 bg-white w-shadow">
+                                        <c:forEach items="${listPost}" var="item">
+                                            <div class="post border-bottom p-3 bg-white w-shadow">
                                             <div class="media text-muted pt-3">
-                                                <img src="${user.linkImgAvatar}" alt="Online user"
+                                                <img src="${following.linkImgAvatar}" alt="Online user"
                                                      class="mr-3 post-user-image">
                                                 <div class="media-body pb-3 mb-0 small lh-125">
                                                     <div class="d-flex justify-content-between align-items-center w-100">
                                                         <span class="post-type text-muted"><a href="#"
-                                                                                              class="text-gray-dark post-user-name mr-2">Arthur Minasyan</a> updated his cover photo.</span>
-                                                        <div class="dropdown">
-                                                            <a href="#" class="post-more-settings" role="button"
-                                                               data-toggle="dropdown" id="postOptions"
-                                                               aria-haspopup="true" aria-expanded="false">
-                                                                <i class='bx bx-dots-horizontal-rounded'></i>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left post-dropdown-menu">
-                                                                <a href="#" class="dropdown-item"
-                                                                   aria-describedby="savePost">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <i class='bx bx-bookmark-plus post-option-icon'></i>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <span class="fs-9">Save post</span>
-                                                                            <small id="savePost"
-                                                                                   class="form-text text-muted">Add this
-                                                                                to your saved items</small>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                                <a href="#" class="dropdown-item"
-                                                                   aria-describedby="hidePost">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <i class='bx bx-hide post-option-icon'></i>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <span class="fs-9">Hide post</span>
-                                                                            <small id="hidePost"
-                                                                                   class="form-text text-muted">See
-                                                                                fewer posts like this</small>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                                <a href="#" class="dropdown-item"
-                                                                   aria-describedby="snoozePost">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <i class='bx bx-time post-option-icon'></i>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <span class="fs-9">Snooze Arthur for 30 days</span>
-                                                                            <small id="snoozePost"
-                                                                                   class="form-text text-muted">Temporarily
-                                                                                stop seeing posts</small>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                                <a href="#" class="dropdown-item"
-                                                                   aria-describedby="reportPost">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">
-                                                                            <i class='bx bx-block post-option-icon'></i>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <span class="fs-9">Report</span>
-                                                                            <small id="reportPost"
-                                                                                   class="form-text text-muted">I'm
-                                                                                concerned about this post</small>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+                                                                                              class="text-gray-dark post-user-name mr-2">${following.firstName} ${following.lastName}</a></span>
+
                                                     </div>
-                                                    <span class="d-block">3 hours ago <i
+                                                    <span class="d-block">${item.date_created }<i
                                                             class='bx bx-globe ml-3'></i></span>
                                                 </div>
                                             </div>
                                             <div class="mt-3">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis
-                                                    voluptatem veritatis harum, tenetur, quibusdam voluptatum, incidunt
-                                                    saepe minus maiores ea atque sequi illo veniam sint quaerat corporis
-                                                    totam et. Culpa?</p>
+                                                <p>${item.text}</p>
                                             </div>
                                             <div class="d-block mt-3">
-                                                <img src="/assets/images/users/post/post-1.jpg" class="w-100 mb-3"
+                                                <c:if test="${item.linkImgPost!=null}">
+                                                    <img src="${item.linkImgPost}" class="w-100 mb-3"
                                                      alt="post image">
+                                                </c:if>
                                             </div>
                                             <div class="mb-2">
 
                                                 <!-- Reactions -->
                                                 <div class="argon-reaction">
                                                         <span class="like-btn">
-                                                            <a href="#" class="post-card-buttons" id="reactions"><i
-                                                                    class='bx bxs-like mr-2'></i> 67</a>
-                                                            <ul class="reactions-box dropdown-shadow">
-                                                                <li class="reaction reaction-like"
-                                                                    data-reaction="Like"></li>
-                                                                <li class="reaction reaction-love"
-                                                                    data-reaction="Love"></li>
-                                                                <li class="reaction reaction-haha"
-                                                                    data-reaction="HaHa"></li>
-                                                                <li class="reaction reaction-wow"
-                                                                    data-reaction="Wow"></li>
-                                                                <li class="reaction reaction-sad"
-                                                                    data-reaction="Sad"></li>
-                                                                <li class="reaction reaction-angry"
-                                                                    data-reaction="Angry"></li>
-                                                            </ul>
+                                                            <a class="post-card-buttons" id="reactionsText_${item.id}"><i
+                                                                    class='bx bxs-like mr-2 ${item.isLike==1?"likeIcon":" "}' id="reactions_${item.id}" onclick="onLike(${user.id},${item.id})"></i> ${item.numberOfLike}</a>
+
                                                         </span>
                                                 </div>
 
                                                 <a href="javascript:void(0)" class="post-card-buttons"
-                                                   id="show-comments"><i class='bx bx-message-rounded mr-2'></i> 5</a>
-                                                <div class="dropdown dropup share-dropup">
-                                                    <a href="#" class="post-card-buttons" data-toggle="dropdown"
-                                                       aria-haspopup="true" aria-expanded="false">
-                                                        <i class='bx bx-share-alt mr-2'></i> Share
-                                                    </a>
-                                                    <div class="dropdown-menu post-dropdown-menu">
-                                                        <a href="#" class="dropdown-item">
-                                                            <div class="row">
-                                                                <div class="col-md-2">
-                                                                    <i class='bx bx-share-alt'></i>
-                                                                </div>
-                                                                <div class="col-md-10">
-                                                                    <span>Share Now (Public)</span>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item">
-                                                            <div class="row">
-                                                                <div class="col-md-2">
-                                                                    <i class='bx bx-share-alt'></i>
-                                                                </div>
-                                                                <div class="col-md-10">
-                                                                    <span>Share...</span>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item">
-                                                            <div class="row">
-                                                                <div class="col-md-2">
-                                                                    <i class='bx bx-message'></i>
-                                                                </div>
-                                                                <div class="col-md-10">
-                                                                    <span>Send as Message</span>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                                   ><i class='bx bx-message-rounded mr-2'></i> 5</a>
+
                                             </div>
-                                            <div class="border-top pt-3 hide-comments" style="display: none;">
+                                            <div class="border-top pt-3 hide-comments" style="">
                                                 <div class="row bootstrap snippets">
                                                     <div class="col-md-12">
                                                         <div class="comment-wrapper">
@@ -735,7 +533,7 @@
                                                                     <ul class="media-list comments-list">
                                                                         <li class="media comment-form">
                                                                             <a href="#" class="pull-left">
-                                                                                <img src="/assets/images/users/user-4.jpg"
+                                                                                <img src="${user.linkImgAvatar}"
                                                                                      alt="" class="img-circle">
                                                                             </a>
                                                                             <div class="media-body">
@@ -745,37 +543,15 @@
                                                                                             <div class="input-group">
                                                                                                 <input type="text"
                                                                                                        class="form-control comment-input"
-                                                                                                       placeholder="Write a comment...">
+                                                                                                       placeholder="Write a comment..." id="wcomment_${item.id}">
 
                                                                                                 <div class="input-group-btn">
-                                                                                                    <button type="button"
-                                                                                                            class="btn comment-form-btn"
-                                                                                                            data-toggle="tooltip"
-                                                                                                            data-placement="top"
-                                                                                                            title="Tooltip on top">
+                                                                                                    <div
+                                                                                                            class="btn"
+                                                                                                            onclick="creComment(${item.id})"
+                                                                                                            >
                                                                                                         <i class='bx bxs-smiley-happy'></i>
-                                                                                                    </button>
-                                                                                                    <button type="button"
-                                                                                                            class="btn comment-form-btn comment-form-btn"
-                                                                                                            data-toggle="tooltip"
-                                                                                                            data-placement="top"
-                                                                                                            title="Tooltip on top">
-                                                                                                        <i class='bx bx-camera'></i>
-                                                                                                    </button>
-                                                                                                    <button type="button"
-                                                                                                            class="btn comment-form-btn comment-form-btn"
-                                                                                                            data-toggle="tooltip"
-                                                                                                            data-placement="top"
-                                                                                                            title="Tooltip on top">
-                                                                                                        <i class='bx bx-microphone'></i>
-                                                                                                    </button>
-                                                                                                    <button type="button"
-                                                                                                            class="btn comment-form-btn"
-                                                                                                            data-toggle="tooltip"
-                                                                                                            data-placement="top"
-                                                                                                            title="Tooltip on top">
-                                                                                                        <i class='bx bx-file-blank'></i>
-                                                                                                    </button>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -784,111 +560,37 @@
                                                                             </div>
                                                                         </li>
                                                                         <li class="media">
-                                                                            <a href="#" class="pull-left">
-                                                                                <img src="/assets/images/users/user-2.jpg"
-                                                                                     alt="" class="img-circle">
-                                                                            </a>
                                                                             <div class="media-body">
-                                                                                <div class="d-flex justify-content-between align-items-center w-100">
-                                                                                    <strong class="text-gray-dark"><a
-                                                                                            href="#" class="fs-8">Karen
-                                                                                        Minas</a></strong>
-                                                                                    <a href="#"><i
-                                                                                            class='bx bx-dots-horizontal-rounded'></i></a>
-                                                                                </div>
-                                                                                <span class="d-block comment-created-time">30 min ago</span>
-                                                                                <p class="fs-8 pt-2">
-                                                                                    Lorem ipsum dolor sit amet,
-                                                                                    consectetur adipiscing elit.
-                                                                                    Lorem ipsum dolor sit amet, <a
-                                                                                        href="#">#consecteturadipiscing </a>.
-                                                                                </p>
-                                                                                <div class="commentLR">
-                                                                                    <button type="button"
-                                                                                            class="btn btn-link fs-8">
-                                                                                        Like
-                                                                                    </button>
-                                                                                    <button type="button"
-                                                                                            class="btn btn-link fs-8">
-                                                                                        Reply
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="media">
-                                                                            <a href="#" class="pull-left">
-                                                                                <img src="https://bootdey.com/img/Content/user_2.jpg"
-                                                                                     alt="" class="img-circle">
-                                                                            </a>
-                                                                            <div class="media-body">
-                                                                                <div class="d-flex justify-content-between align-items-center w-100">
-                                                                                    <strong class="text-gray-dark"><a
-                                                                                            href="#" class="fs-8">Lia
-                                                                                        Earnest</a></strong>
-                                                                                    <a href="#"><i
-                                                                                            class='bx bx-dots-horizontal-rounded'></i></a>
-                                                                                </div>
-                                                                                <span class="d-block comment-created-time">2 hours ago</span>
-                                                                                <p class="fs-8 pt-2">
-                                                                                    Lorem ipsum dolor sit amet,
-                                                                                    consectetur adipiscing elit.
-                                                                                    Lorem ipsum dolor sit amet, <a
-                                                                                        href="#">#consecteturadipiscing </a>.
-                                                                                </p>
-                                                                                <div class="commentLR">
-                                                                                    <button type="button"
-                                                                                            class="btn btn-link fs-8">
-                                                                                        Like
-                                                                                    </button>
-                                                                                    <button type="button"
-                                                                                            class="btn btn-link fs-8">
-                                                                                        Reply
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="media">
-                                                                            <a href="#" class="pull-left">
-                                                                                <img src="https://bootdey.com/img/Content/user_3.jpg"
-                                                                                     alt="" class="img-circle">
-                                                                            </a>
-                                                                            <div class="media-body">
-                                                                                <div class="d-flex justify-content-between align-items-center w-100">
-                                                                                    <strong class="text-gray-dark"><a
-                                                                                            href="#" class="fs-8">Rusty
-                                                                                        Mickelsen</a></strong>
-                                                                                    <a href="#"><i
-                                                                                            class='bx bx-dots-horizontal-rounded'></i></a>
-                                                                                </div>
-                                                                                <span class="d-block comment-created-time">17 hours ago</span>
-                                                                                <p class="fs-8 pt-2">
-                                                                                    Lorem ipsum dolor sit amet,
-                                                                                    consectetur adipiscing elit.
-                                                                                    Lorem ipsum dolor sit amet, <a
-                                                                                        href="#">#consecteturadipiscing </a>.
-                                                                                </p>
-                                                                                <div class="commentLR">
-                                                                                    <button type="button"
-                                                                                            class="btn btn-link fs-8">
-                                                                                        Like
-                                                                                    </button>
-                                                                                    <button type="button"
-                                                                                            class="btn btn-link fs-8">
-                                                                                        Reply
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="media">
-                                                                            <div class="media-body">
-                                                                                <div class="comment-see-more text-center">
-                                                                                    <button type="button"
+                                                                                <div class="comment-see-more text-center" id="seemore_${item.id}">
+                                                                                    <button onclick="showMoreComment(${item.id},${item.comments.number+1})" type="button"
                                                                                             class="btn btn-link fs-8">
                                                                                         See More
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
                                                                         </li>
+                                                                        <div id="content_${item.id}">
+                                                                            <c:forEach items="${item.comments.content}" var="icmt">
+                                                                                <li class="media">
+                                                                                    <a href="#" class="pull-left">
+                                                                                        <img src="${icmt.linkImgAvatar}"
+                                                                                             alt="" class="img-circle">
+                                                                                    </a>
+
+                                                                                    <div class="media-body">
+                                                                                        <div class="d-flex justify-content-between align-items-center w-100">
+                                                                                            <strong class="text-gray-dark"><a
+                                                                                                    href="#" class="fs-8">${icmt.firstName} ${icmt.lastName}</a></strong>
+                                                                                            <a href="#"><i
+                                                                                                    class='bx bx-dots-horizontal-rounded'></i></a>
+                                                                                        </div>
+                                                                                        <p class="fs-8 pt-2">
+                                                                                            ${icmt.text}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </c:forEach>
+                                                                        </div>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -898,6 +600,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </c:forEach>
                                     </div>
                                     <div class="col-md-3 profile-quick-media">
                                     </div>
@@ -992,11 +695,25 @@
                 id:${following.id}
             },
             type: 0,
-            seen:0
+            seen:0,
+            link:'/profile/'+senderid
         };
         stompClient.send("/app/notification.private", {}, JSON.stringify(notification));
         window.location = "/profile/"+followingid;
         event.preventDefault();
+        $.ajax({
+            type : "post",
+            url : "/api/notification",
+            data: JSON.stringify(notification),
+            contentType:"application/json",
+            dataType:"JSON",
+            success : function(response) {
+
+            },
+            error: function (response) {
+
+            }
+        });
     }
     function deleteFollowing(followingid) {
         $.ajax({
@@ -1027,6 +744,168 @@
         const myToastEl = document.getElementById('toast');
         const toast = new bootstrap.Toast(myToastEl);
         toast.show();
+    }
+    function onLike(userid, postid) {
+        var like = document.getElementById("reactions_"+postid);
+        var reactionsText = document.getElementById("reactionsText_"+postid);
+        if (like.classList.contains('likeIcon')) {
+            $.ajax({
+                type : "delete",
+                url : "/api/like?userId="+userid+"&postId="+postid,
+                success : function(response) {
+                    like.classList.remove('likeIcon');
+                    var soLike = Number(reactionsText.innerText) - 1;
+                    var data = `<i class='bx bxs-like mr-2' id="reactions_`+postid+`" onclick="onLike(`+userid+`,`+postid+`)"></i>`+soLike+``;
+                    reactionsText.innerHTML = data;
+                },
+                error: function (response) {
+
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                type : "post",
+                url : "/api/like?userId="+userid+"&postId="+postid,
+                success : function(response) {
+                    like.classList.add('likeIcon');
+                    var soLike = Number(reactionsText.innerText) + 1;
+                    var data = `<i class='bx bxs-like mr-2 likeIcon' id="reactions_`+postid+`" onclick="`+userid+`,`+postid+`"></i>`+soLike+``;
+                    reactionsText.innerHTML = data;
+                },
+                error: function (response) {
+
+                }
+            });
+            var notification = {
+                senderid: senderid,
+                receiver: {
+                    id:${following.id}
+                },
+                type: 2,
+                seen:0,
+                link:'/post/'+postid
+            };
+            if (notification.senderid!=notification.receiver.id) {
+                stompClient.send("/app/notification.private", {}, JSON.stringify(notification));
+                event.preventDefault();
+            }
+            $.ajax({
+                type : "post",
+                url : "/api/notification",
+                data: JSON.stringify(notification),
+                contentType:"application/json",
+                dataType:"JSON",
+                success : function(response) {
+
+                },
+                error: function (response) {
+
+                }
+            });
+        }
+    }
+    function showMoreComment(postId, page) {
+        $.ajax({
+            type : "get",
+            url : "/api/comment?postId="+postId+"&page="+page,
+            success : function(response) {
+                var data = response.content;
+                var numbernext = response.number+1;
+                var seemore = document.getElementById("seemore_"+postId);
+                var content = document.getElementById("content_"+postId);
+                seemore.innerHTML = `<button onclick="showMoreComment(`+postId+`,`+numbernext+`)" type="button"
+                                                                                            class="btn btn-link fs-8">
+                                                                                        See More
+                                                                                    </button>`;
+                data.forEach(function (item) {
+                    var limedia = document.createElement("li");
+                    limedia.classList.add("media");
+                    var tem = `<a href="#" class="pull-left">
+                                  <img src="`+item.linkImgAvatar+`"
+                                  alt="" class="img-circle">
+                               </a>
+                               <div class="media-body">
+                                 <div class="d-flex justify-content-between align-items-center w-100">
+                                    <strong class="text-gray-dark"><a
+                                       href="#" class="fs-8">`+item.firstName+` `+item.lastName+`</a></strong>
+                                           <a href="#"><i class='bx bx-dots-horizontal-rounded'></i></a>
+                                 </div>
+                                 <p class="fs-8 pt-2">`
+                        +item.text+`
+                                 </p>
+                               </div>`;
+                    limedia.innerHTML = tem;
+                    content.appendChild(limedia);
+                })
+            },
+            error: function (response) {
+
+            }
+        });
+    }
+    function creComment(postId) {
+        var text = document.getElementById("wcomment_"+postId);
+        var cmt = {
+            text: text.value,
+            date_created: new Date(),
+            post: {
+                id:postId
+            },
+            user: {
+                id: ${user.id}
+            }
+        };
+        $.ajax({
+            type : "post",
+            url : "/api/comment",
+            data : JSON.stringify(cmt),
+            contentType:"application/json",
+            dataType:"JSON",
+            success : function(response) {
+            },
+            error: function (response) {
+
+            }
+        });
+        text.value='';
+        var notification = {
+            senderid: senderid,
+            receiver: {
+                id:${following.id}
+            },
+            type: 1,
+            seen:0,
+            link:'/post/'+postid
+        };
+        if (notification.senderid!=notification.receiver.id) {
+            stompClient.send("/app/notification.private", {}, JSON.stringify(notification));
+            event.preventDefault();
+        }
+        $.ajax({
+            type : "post",
+            url : "/api/notification",
+            data: JSON.stringify(notification),
+            contentType:"application/json",
+            dataType:"JSON",
+            success : function(response) {
+
+            },
+            error: function (response) {
+
+            }
+        });
+    }
+    function redir(url, id) {
+        $.ajax({
+            type: "put",
+            url: "/api/notification/"+id,
+            success: function (response) {
+
+            }
+        });
+        window.location = url;
     }
 </script>
 

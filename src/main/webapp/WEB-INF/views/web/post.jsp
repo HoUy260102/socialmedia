@@ -7,24 +7,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="assets/images/logo-16x16.png"/>
+    <link rel="icon" type="image/png" href="/assets/images/logo-16x16.png"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Argon - Social Network</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet">
-    <link href="assets/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/css/boxicons.min.css" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/components.css" rel="stylesheet">
-    <link href="assets/css/media.css" rel="stylesheet">
-    <link href="assets/css/chat.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/components.css" rel="stylesheet">
+    <link href="/assets/css/media.css" rel="stylesheet">
+    <link href="/assets/css/chat.css" rel="stylesheet">
     <link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js" type="text/javascript"></script>
-    <script src="assets/js/load.js" type="text/javascript"></script>
+    <script src="/assets/js/load.js" type="text/javascript"></script>
     <style>
         .likeIcon{
             color: #007bff;
@@ -41,7 +41,7 @@
                     <ul class="nav navbar-nav enable-mobile px-2">
                         <li class="nav-item">
                             <button type="button" class="btn nav-link p-0"><img
-                                    src="assets/images/icons/theme/post-image.png" class="f-nav-icon"
+                                    src="/assets/images/icons/theme/post-image.png" class="f-nav-icon"
                                     alt="Quick make post"></button>
                         </li>
                         <li class="nav-item w-100 py-2">
@@ -60,14 +60,14 @@
                         <li class="nav-item">
                             <a href="messages.html" class="nav-link nav-icon nav-links message-drop drop-w-tooltip"
                                data-placement="bottom" data-title="Messages">
-                                <img src="assets/images/icons/navbar/message.png" class="message-dropdown f-nav-icon"
+                                <img src="/assets/images/icons/navbar/message.png" class="message-dropdown f-nav-icon"
                                      alt="navbar icon">
                             </a>
                         </li>
                     </ul>
                     <ul class="navbar-nav mr-5 flex-row" id="main_menu">
                         <a class="navbar-brand nav-item mr-lg-5" href="index.html"><img
-                                src="assets/images/logo-64x64.png" width="40" height="40" class="mr-3" alt="Logo"></a>
+                                src="/assets/images/logo-64x64.png" width="40" height="40" class="mr-3" alt="Logo"></a>
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <form action="/searchuser" method="get" class="w-30 mx-2 my-auto d-inline form-inline mr-5 search-form">
                             <div class="input-group" aria-haspopup="true" aria-expanded="false"
@@ -109,7 +109,7 @@
                                     <li class="dropdown-item">
                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                             <div class="notify-img">
-                                                <img src="assets/images/users/user-5.png" alt="Search result">
+                                                <img src="/assets/images/users/user-5.png" alt="Search result">
                                             </div>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10">
@@ -124,7 +124,7 @@
                                     <li class="dropdown-item">
                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                             <div class="notify-img">
-                                                <img src="assets/images/groups/group-2.jpg" alt="Search result">
+                                                <img src="/assets/images/groups/group-2.jpg" alt="Search result">
                                             </div>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10">
@@ -139,12 +139,12 @@
                                     <li class="dropdown-item">
                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                             <div class="notify-img">
-                                                <img src="assets/images/groups/group-1.png" alt="Search result">
+                                                <img src="/assets/images/groups/group-1.png" alt="Search result">
                                             </div>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10">
                                             <a href="#" class="notification-user">Argon Social Network <img
-                                                    src="assets/images/theme/verify.png" width="10px" class="verify"
+                                                    src="/assets/images/theme/verify.png" width="10px" class="verify"
                                                     alt="Group verified"></a>
                                             <a href="#"
                                                class="btn btn-quick-link join-group-btn border text-right float-right">
@@ -163,7 +163,7 @@
                             <a href="#" class="nav-link nav-icon nav-links drop-w-tooltip" data-toggle="dropdown"
                                data-placement="bottom" data-title="Create" role="button" aria-haspopup="true"
                                aria-expanded="false">
-                                <img src="assets/images/icons/navbar/create.png" alt="navbar icon">
+                                <img src="/assets/images/icons/navbar/create.png" alt="navbar icon">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right nav-dropdown-menu">
                                 <a href="#" class="dropdown-item" aria-describedby="createGroup">
@@ -196,7 +196,7 @@
                             <a href="#" class="nav-link nav-links message-drop drop-w-tooltip" data-toggle="dropdown"
                                data-placement="bottom" data-title="Messages" role="button" aria-haspopup="true"
                                aria-expanded="false">
-                                <img src="assets/images/icons/navbar/message.png" class="message-dropdown"
+                                <img src="/assets/images/icons/navbar/message.png" class="message-dropdown"
                                      alt="navbar icon"> <span class="badge badge-pill badge-primary">1</span>
                             </a>
                             <ul class="dropdown-menu notify-drop dropdown-menu-right nav-drop shadow-sm">
@@ -217,7 +217,7 @@
                                     <li>
                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                             <div class="notify-img">
-                                                <img src="assets/images/users/user-6.png" alt="notification user image">
+                                                <img src="/assets/images/users/user-6.png" alt="notification user image">
                                             </div>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10">
@@ -234,7 +234,7 @@
                                     <li>
                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                             <div class="notify-img">
-                                                <img src="assets/images/users/user-5.png" alt="notification user image">
+                                                <img src="/assets/images/users/user-5.png" alt="notification user image">
                                             </div>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10">
@@ -250,7 +250,7 @@
                                     <li>
                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                             <div class="notify-img">
-                                                <img src="assets/images/users/user-7.png" alt="notification user image">
+                                                <img src="/assets/images/users/user-7.png" alt="notification user image">
                                             </div>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10">
@@ -266,7 +266,7 @@
                                     <li>
                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                             <div class="notify-img">
-                                                <img src="assets/images/users/user-8.png" alt="notification user image">
+                                                <img src="/assets/images/users/user-8.png" alt="notification user image">
                                             </div>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10">
@@ -282,7 +282,7 @@
                                     <li>
                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                             <div class="notify-img">
-                                                <img src="assets/images/users/user-9.png" alt="notification user image">
+                                                <img src="/assets/images/users/user-9.png" alt="notification user image">
                                             </div>
                                         </div>
                                         <div class="col-md-10 col-sm-10 col-xs-10">
@@ -298,7 +298,7 @@
                                     <li>
                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                             <div class="notify-img">
-                                                <img src="assets/images/users/user-10.png"
+                                                <img src="/assets/images/users/user-10.png"
                                                      alt="notification user image">
                                             </div>
                                         </div>
@@ -322,7 +322,7 @@
                             <a href="#" class="nav-link nav-links rm-drop-mobile drop-w-tooltip" data-toggle="dropdown"
                                data-placement="bottom" data-title="Notifications" role="button" aria-haspopup="true"
                                aria-expanded="false">
-                                <img src="assets/images/icons/navbar/notification.png" class="notification-bell"
+                                <img src="/assets/images/icons/navbar/notification.png" class="notification-bell"
                                      alt="navbar icon"> <span class="badge badge-pill badge-primary">${notificationCnt}</span>
                             </a>
                             <ul class="dropdown-menu notify-drop dropdown-menu-right nav-drop shadow-sm">
@@ -341,7 +341,7 @@
                                 <!-- notify content -->
                                 <div class="drop-content">
                                     <c:forEach items="${listNotification.content}" var="item">
-                                        <li ${item.seen==0?'style="background-color:#f2f4f5;cursor:pointer"':'style="cursor:pointer"'} onclick="redir(`${item.link}`, ${item.id})">
+                                        <li ${item.seen==0?'style="background-color:#f2f4f5;cursor:pointer"':'style="cursor:pointer"'} onclick="redir(`${item.link}`,${item.id})">
                                             <div class="col-md-2 col-sm-2 col-xs-2">
                                                 <div class="notify-img">
                                                     <img src="${item.linkImgAvatar}"
@@ -371,7 +371,7 @@
                             <a href="#" class="nav-link nav-links nav-icon drop-w-tooltip" data-toggle="dropdown"
                                data-placement="bottom" data-title="Pages" role="button" aria-haspopup="true"
                                aria-expanded="false">
-                                <img src="assets/images/icons/navbar/flag.png" alt="navbar icon">
+                                <img src="/assets/images/icons/navbar/flag.png" alt="navbar icon">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right nav-drop">
                                 <a class="dropdown-item" href="newsfeed-2.html">Newsfeed 2</a>
@@ -382,7 +382,7 @@
                         <li class="nav-item s-nav d-mobile">
                             <a href="marketplace.html" class="nav-link nav-links nav-icon drop-w-tooltip"
                                data-placement="bottom" data-title="Marketplace">
-                                <img src="assets/images/icons/navbar/market.png" alt="navbar icon">
+                                <img src="/assets/images/icons/navbar/market.png" alt="navbar icon">
                             </a>
                         </li>
                         <li class="nav-item s-nav">
@@ -396,28 +396,28 @@
                         <li class="nav-item s-nav nav-icon dropdown">
                             <a href="settings.html" data-toggle="dropdown" data-placement="bottom" data-title="Settings"
                                class="nav-link settings-link rm-drop-mobile drop-w-tooltip" id="settings-dropdown"><img
-                                    src="assets/images/icons/navbar/settings.png" class="nav-settings"
+                                    src="/assets/images/icons/navbar/settings.png" class="nav-settings"
                                     alt="navbar icon"></a>
                             <div class="dropdown-menu dropdown-menu-right settings-dropdown shadow-sm"
                                  aria-labelledby="settings-dropdown">
                                 <a class="dropdown-item" href="#">
-                                    <img src="assets/images/icons/navbar/help.png" alt="Navbar icon"> Help Center</a>
+                                    <img src="/assets/images/icons/navbar/help.png" alt="Navbar icon"> Help Center</a>
                                 <a class="dropdown-item d-flex align-items-center dark-mode"
                                    onClick="event.stopPropagation();" href="#">
-                                    <img src="assets/images/icons/navbar/moon.png" alt="Navbar icon"> Dark Mode
+                                    <img src="/assets/images/icons/navbar/moon.png" alt="Navbar icon"> Dark Mode
                                     <button type="button" class="btn btn-lg btn-toggle ml-auto" data-toggle="button"
                                             aria-pressed="false" autocomplete="off">
                                         <div class="handle"></div>
                                     </button>
                                 </a>
                                 <a class="dropdown-item" href="#">
-                                    <img src="assets/images/icons/navbar/gear-1.png" alt="Navbar icon"> Settings</a>
+                                    <img src="/assets/images/icons/navbar/gear-1.png" alt="Navbar icon"> Settings</a>
                                 <a class="dropdown-item logout-btn" href="/logout">
-                                    <img src="assets/images/icons/navbar/logout.png" alt="Navbar icon"> Log Out</a>
+                                    <img src="/assets/images/icons/navbar/logout.png" alt="Navbar icon"> Log Out</a>
                             </div>
                         </li>
                         <button type="button" class="btn nav-link" id="menu-toggle"><img
-                                src="assets/images/icons/theme/navs.png" alt="Navbar navs"></button>
+                                src="/assets/images/icons/theme/navs.png" alt="Navbar navs"></button>
                     </ul>
 
                 </div>
@@ -432,34 +432,34 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center sd-active">
                                 <a href="index.html" class="sidebar-item"><img
-                                        src="assets/images/icons/left-sidebar/newsfeed.png" alt="newsfeed"> News
+                                        src="/assets/images/icons/left-sidebar/newsfeed.png" alt="newsfeed"> News
                                     Feed</a>
                                 <a href="#" class="newsfeedListicon"><i class='bx bx-dots-horizontal-rounded'></i></a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <a href="messages.html" class="sidebar-item"><img
-                                        src="assets/images/icons/left-sidebar/message.png" alt="message"> Messages</a>
+                                        src="/assets/images/icons/left-sidebar/message.png" alt="message"> Messages</a>
                                 <span class="badge badge-primary badge-pill">2</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <a href="groups.html" class="sidebar-item"><img
-                                        src="assets/images/icons/left-sidebar/group.png" alt="group"> Groups</a>
+                                        src="/assets/images/icons/left-sidebar/group.png" alt="group"> Groups</a>
                                 <span class="badge badge-primary badge-pill">17</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <a href="events.html" class="sidebar-item"><img
-                                        src="assets/images/icons/left-sidebar/event.png" alt="event"> Events</a>
+                                        src="/assets/images/icons/left-sidebar/event.png" alt="event"> Events</a>
                                 <span class="badge badge-primary badge-pill">3</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <a href="find-friends.html" class="sidebar-item"><img
-                                        src="assets/images/icons/left-sidebar/find-friends.png" alt="find-friends"> Find
+                                        src="/assets/images/icons/left-sidebar/find-friends.png" alt="find-friends"> Find
                                     Friends</a>
                                 <span class="badge badge-primary badge-pill"><i class='bx bx-chevron-right'></i></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center newsLink">
                                 <a href="https://github.com/ArtMin96/argon-social" target="_blank" class="sidebar-item"><img
-                                        src="assets/images/icons/left-sidebar/news.png" alt="find-friends"> News</a>
+                                        src="/assets/images/icons/left-sidebar/news.png" alt="find-friends"> News</a>
                                 <span class="badge badge-primary badge-pill"><i class='bx bx-chevron-right'></i></span>
                             </li>
                         </ul>
@@ -468,34 +468,6 @@
                 <div class="col-md-6 second-section" id="page-content-wrapper">
                     <ul class="list-unstyled" style="margin-bottom: 0;">
                         <li class="media post-form w-shadow">
-                            <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
-                                <div class="media-body">
-                                    <div class="form-group post-input">
-                                        <textarea class="form-control" id="postForm" name="text" rows="2"
-                                                  placeholder="What's on your mind, Arthur?"></textarea>
-                                    </div>
-                                    <div class="row post-form-group">
-                                        <div class="col-md-9">
-                                            <label for="postphoto" class="btn btn-link post-form-btn btn-sm">
-                                                <img src="assets/images/icons/theme/post-image.png" alt="post form icon">
-                                                <span>Photo/Video</span>
-                                            </label>
-                                            <input type="file" id="postphoto" name="postphoto" hidden>
-                                            <button type="button" class="btn btn-link post-form-btn btn-sm">
-                                                <img src="assets/images/icons/theme/tag-friend.png" alt="post form icon">
-                                                <span>Tag Friends</span>
-                                            </button>
-                                            <button type="button" class="btn btn-link post-form-btn btn-sm">
-                                                <img src="assets/images/icons/theme/check-in.png" alt="post form icon">
-                                                <span>Check In</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 text-right">
-                                            <button type="submit" class="btn btn-primary btn-sm">Publish</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
                         </li>
                     </ul>
 
@@ -731,27 +703,26 @@
 <%--                                </div>--%>
 <%--                            </div>--%>
 <%--                        </div>--%>
-                        <c:forEach items="${listPost.content}" var="item">
-                                            <div class="post border-bottom p-3 bg-white w-shadow">
+                                    <div class="post border-bottom p-3 bg-white w-shadow">
                                             <div class="media text-muted pt-3">
-                                                <img src="${item.user.linkImgAvatar}" alt="Online user"
+                                                <img src="${post.user.linkImgAvatar}" alt="Online user"
                                                      class="mr-3 post-user-image">
                                                 <div class="media-body pb-3 mb-0 small lh-125">
                                                     <div class="d-flex justify-content-between align-items-center w-100">
                                                         <span class="post-type text-muted"><a href="#"
-                                                                                              class="text-gray-dark post-user-name mr-2">${item.user.firstName} ${item.user.lastName}</a></span>
+                                                                                              class="text-gray-dark post-user-name mr-2">${post.user.firstName} ${post.user.lastName}</a></span>
 
                                                     </div>
-                                                    <span class="d-block">${item.date_created }<i
+                                                    <span class="d-block">${post.date_created }<i
                                                             class='bx bx-globe ml-3'></i></span>
                                                 </div>
                                             </div>
                                             <div class="mt-3">
-                                                <p>${item.text}</p>
+                                                <p>${post.text}</p>
                                             </div>
                                             <div class="d-block mt-3">
-                                                <c:if test="${item.linkImgPost!=null}">
-                                                    <img src="${item.linkImgPost}" class="w-100 mb-3"
+                                                <c:if test="${post.linkImgPost!=null}">
+                                                    <img src="${post.linkImgPost}" class="w-100 mb-3"
                                                      alt="post image">
                                                 </c:if>
                                             </div>
@@ -760,8 +731,8 @@
                                                 <!-- Reactions -->
                                                 <div class="argon-reaction">
                                                         <span class="like-btn">
-                                                            <a class="post-card-buttons" id="reactionsText_${item.id}"><i
-                                                                    class='bx bxs-like mr-2 ${item.isLike==1?"likeIcon":" "}' id="reactions_${item.id}" onclick="onLike(${user.id},${item.id},${item.user.id})"></i> ${item.numberOfLike}</a>
+                                                            <a class="post-card-buttons" id="reactionsText_${post.id}"><i
+                                                                    class='bx bxs-like mr-2 ${post.isLike==1?"likeIcon":" "}' id="reactions_${post.id}" onclick="onLike(${user.id},${post.id},${post.user.id})"></i> ${post.numberOfLike}</a>
 
                                                         </span>
                                                 </div>
@@ -789,12 +760,12 @@
                                                                                             <div class="input-group">
                                                                                                 <input type="text"
                                                                                                        class="form-control comment-input"
-                                                                                                       placeholder="Write a comment..." id="wcomment_${item.id}">
+                                                                                                       placeholder="Write a comment..." id="wcomment_${post.id}">
 
                                                                                                 <div class="input-group-btn">
                                                                                                     <div
                                                                                                             class="btn"
-                                                                                                            onclick="creComment(${item.id}, ${item.user.id})"
+                                                                                                            onclick="creComment(${post.id}, ${post.user.id})"
                                                                                                             >
                                                                                                         <i class='bx bxs-smiley-happy'></i>
                                                                                                     </div>
@@ -807,16 +778,16 @@
                                                                         </li>
                                                                         <li class="media">
                                                                             <div class="media-body">
-                                                                                <div class="comment-see-more text-center" id="seemore_${item.id}">
-                                                                                    <button onclick="showMoreComment(${item.id},${item.comments.number+1})" type="button"
+                                                                                <div class="comment-see-more text-center" id="seemore_${post.id}">
+                                                                                    <button onclick="showMoreComment(${post.id},${post.comments.number+1})" type="button"
                                                                                             class="btn btn-link fs-8">
                                                                                         See More
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
                                                                         </li>
-                                                                        <div id="content_${item.id}">
-                                                                            <c:forEach items="${item.comments.content}" var="icmt">
+                                                                        <div id="content_${post.id}">
+                                                                            <c:forEach items="${post.comments.content}" var="icmt">
                                                                                 <li class="media">
                                                                                     <a href="#" class="pull-left">
                                                                                         <img src="${icmt.linkImgAvatar}"
@@ -846,12 +817,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                        </c:forEach>
-                    </div>
-                    <div class="d-flex justify-content-center my-5 load-post" id="loadMoreBtn">
-                        <button onclick="loadMorePost(1)" class="btn btn-quick-link join-group-btn border shadow"
-                                data-toggle="tooltip" data-placement="top" data-title="Load More Post"><i
-                                class='bx bx-dots-horizontal-rounded'></i></button>
                     </div>
                 </div>
                 <div class="col-md-3 third-section">
@@ -879,7 +844,7 @@
                         </div>
                         <div class="col-md-5 pr-3">
                             <div class="media text-muted pr-3 pt-3">
-                                <img src="assets/images/users/user-1.jpg" alt="user image"
+                                <img src="/assets/images/users/user-1.jpg" alt="user image"
                                      class="mr-3 post-modal-user-img">
                                 <div class="media-body">
                                     <div class="d-flex justify-content-between align-items-center w-100 post-modal-top-user fs-9">
@@ -941,7 +906,7 @@
                     <div class="col-md-12 d-flex align-items-center justify-content-center">
                         <div class="call-user text-center">
                             <div class="call-user-img-anim">
-                                <img src="assets/images/users/user-1.jpg" class="call-user-img" alt="Call user image">
+                                <img src="/assets/images/users/user-1.jpg" class="call-user-img" alt="Call user image">
                             </div>
                             <p class="call-user-name">Name Surename</p>
                             <p class="text-muted call-time">05:28</p>
@@ -978,9 +943,9 @@
 </div>
 
 <!-- Core -->
-<script src="assets/js/jquery/jquery-3.3.1.min.js"></script>
-<script src="assets/js/popper/popper.min.js"></script>
-<script src="assets/js/bootstrap/bootstrap.min.js"></script>
+<script src="/assets/js/jquery/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/popper/popper.min.js"></script>
+<script src="/assets/js/bootstrap/bootstrap.min.js"></script>
 <!-- Optional -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -995,8 +960,8 @@
     });
 </script>
 <script></script>
-<script src="assets/js/app.js"></script>
-<script src="assets/js/components/components.js"></script>
+<script src="/assets/js/app.js"></script>
+<script src="/assets/js/components/components.js"></script>
 <script>
     var stompClient = null;
     var senderid = ${user.id};
@@ -1178,123 +1143,6 @@
             dataType:"JSON",
             success : function(response) {
 
-            },
-            error: function (response) {
-
-            }
-        });
-    }
-    function loadMorePost(page) {
-        $.ajax({
-            type : "get",
-            url : "/api/loadpost?page="+page,
-            success : function(response) {
-                var data = response.content;
-                var postContent = document.getElementById("postContent");
-                data.forEach(function (item) {
-                    var child = document.createElement("div");
-                    child.classList.add("post");
-                    child.classList.add("border-bottom");
-                    child.classList.add("p-3");
-                    child.classList.add("bg-white");
-                    child.classList.add("w-shadow");
-                    var tem= `
-                                            <div class="media text-muted pt-3">
-                                                <img src="`+item.user.linkImgAvatar+`" alt="Online user"
-                                                     class="mr-3 post-user-image">
-                                                <div class="media-body pb-3 mb-0 small lh-125">
-                                                    <div class="d-flex justify-content-between align-items-center w-100">
-                                                        <span class="post-type text-muted"><a href="#"
-                                                                                              class="text-gray-dark post-user-name mr-2">`+item.user.firstName+` `+item.user.lastName+`</a></span>
-
-                                                    </div>
-                                                    <span class="d-block">`+item.date_created+`<i
-                                                            class='bx bx-globe ml-3'></i></span>
-                                                </div>
-                                            </div>
-                                            <div class="mt-3">
-                                                <p>`+item.text+`</p>
-                                            </div>
-                                            <div class="d-block mt-3">`;
-                    if (item.linkImgPost!='') tem+=`<img src="`+item.linkImgPost+`" class="w-100 mb-3"
-                                                     alt="post image">`;
-                    tem+=`</div>
-                    <div class="mb-2">
-
-                                                <!-- Reactions -->
-                                                <div class="argon-reaction">
-                                                        <span class="like-btn">
-                                                            <a class="post-card-buttons" id="reactionsText_`+item.id+`"><i
-                                                                    class='bx bxs-like mr-2 `;
-                                                if (item.isLike==1) tem+=`likeIcon`;
-                                                tem+=`' id="reactions_`+item.id+`" onclick="onLike(${user.id},`+item.id+`,`+item.user.id+`)"></i> `+item.numberOfLike+`</a>
-
-                                                        </span>
-                                                </div>
-
-                                                <a href="javascript:void(0)" class="post-card-buttons"
-                                                   ><i class='bx bx-message-rounded mr-2'></i> 5</a>
-
-                                            </div>
-                                            <div class="border-top pt-3 hide-comments" style="">
-                                                <div class="row bootstrap snippets">
-                                                    <div class="col-md-12">
-                                                        <div class="comment-wrapper">
-                                                            <div class="panel panel-info">
-                                                                <div class="panel-body">
-                                                                    <ul class="media-list comments-list">
-                                                                        <li class="media comment-form">
-                                                                            <a href="#" class="pull-left">
-                                                                                <img src="${user.linkImgAvatar}"
-                                                                                     alt="" class="img-circle">
-                                                                            </a>
-                                                                            <div class="media-body">
-                                                                                <form action="" method="" role="form">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-12">
-                                                                                            <div class="input-group">
-                                                                                                <input type="text"
-                                                                                                       class="form-control comment-input"
-                                                                                                       placeholder="Write a comment..." id="wcomment_`+item.id+`">
-
-                                                                                                <div class="input-group-btn">
-                                                                                                    <div
-                                                                                                            class="btn"
-                                                                                                            onclick="creComment(`+item.id+`,`+item.user.id+`)"
-                                                                                                            >
-                                                                                                        <i class='bx bxs-smiley-happy'></i>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="media">
-                                                                            <div class="media-body">
-                                                                                <div class="comment-see-more text-center" id="seemore_`+item.id+`">
-                                                                                    <button onclick="showMoreComment(`+item.id+`,0)" type="button"
-                                                                                            class="btn btn-link fs-8">
-                                                                                        See More
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <div id="content_`+item.id+`">
-                                                                        </div>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                    `
-                    child.innerHTML = tem;
-                    postContent.appendChild(child);
-                })
-                var loadMorebtn = document.getElementById("loadMoreBtn");
-                loadMorebtn.innerHTML = ` <button onclick="loadMorePost(`+( response.number+1)+`)" class="btn btn-quick-link join-group-btn border shadow"
-                                data-toggle="tooltip" data-placement="top" data-title="Load More Post"><i
-                                class='bx bx-dots-horizontal-rounded'></i></button>`;
             },
             error: function (response) {
 

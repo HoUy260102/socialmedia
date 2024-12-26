@@ -9,6 +9,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web/following.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web/myprofile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web/post.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web/searchuser.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/web" />
       </map>
     </option>

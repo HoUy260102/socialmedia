@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,14 +24,14 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentConverter commentConverter;
     @Override
+    @Transactional
     public void save(CommentEntity comment) {
         commentRepository.save(comment);
     }
-
     @Override
-    public List<CommentDTO> findByPostIdPaging(Long postId, int page) {
+    public Page<CommentDTO> findByPostIdPaging(Long postId, int page) {
         Pageable pageable = PageRequest.of(page,2);
         Page<CommentEntity> commentEntities = this.commentRepository.findAllByPost_Id(postId, pageable);
-        return commentEntities.stream().map(x->commentConverter.toCommentDTO(x)).collect(Collectors.toList());
+        return commentEntities.map(x->commentConverter.toCommentDTO(x));
     }
 }

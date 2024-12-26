@@ -6,12 +6,10 @@ import com.javaweb.entity.UserEntity;
 import com.javaweb.model.dto.MyUserDetail;
 import com.javaweb.model.dto.UserDTO;
 import com.javaweb.model.dto.UserSearchResponseDTO;
+import com.javaweb.repository.NotificationRepository;
 import com.javaweb.security.utils.SecurityUtils;
-import com.javaweb.service.FollowerService;
-import com.javaweb.service.FollowingService;
+import com.javaweb.service.*;
 import com.javaweb.service.Impl.CustomUserDetailService;
-import com.javaweb.service.PostService;
-import com.javaweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -43,15 +42,16 @@ public class HomeController {
 	private FollowerService followerService;
 	@Autowired
 	private PostService postService;
-	@RequestMapping(value = "/admin/",method = RequestMethod.GET)
-	public String admin() {
-		System.out.println("hello");
-		return "Hello";
-	}
+	@Autowired
+	private NotificationRepository notificationRepository;
+	@Autowired
+	private NotificationService notificationService;
 	@GetMapping(value = "/myprofile")
 	public ModelAndView myProfile(HttpSession session) {
 		ModelAndView mav = new ModelAndView("web/myprofile");
 		mav.addObject("listPost", postService.findAllByUser_IdAndOrderByDate_createdDesc(((UserDTO)session.getAttribute("user")).getId()));
+		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(((UserDTO)session.getAttribute("user")).getId(),0L));
+		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(((UserDTO)session.getAttribute("user")).getId(),0));
 		return mav;
 	}
 	@GetMapping(value = "/edit-profile")
@@ -65,14 +65,33 @@ public class HomeController {
 	public ModelAndView profile(@PathVariable Long id, HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView("web/profile");
 		UserDTO userDTO = (UserDTO) session.getAttribute("user");
-		mav.addObject("following", userConverter.toUserDTO((userService.findById(id))));
 		FollowingEntity followingEntity = followingService.findByFollowingIdAndUser_Id(id,userDTO.getId());
+		mav.addObject("following", userConverter.toUserDTO((userService.findById(id))));
+		mav.addObject("listPost", postService.findAllByUser_IdAndOrderByDate_createdDesc(id, userDTO.getId()));
 		mav.addObject("check",followingEntity==null?0:1);
+		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(userDTO.getId(),0L));
+		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(userDTO.getId(),0));
+		return mav;
+	}
+	@GetMapping("/post/{id}")
+	public ModelAndView post(@PathVariable Long id, HttpSession session) {
+		ModelAndView mav = new ModelAndView("web/post");
+		UserDTO userDTO = (UserDTO) session.getAttribute("user");
+		mav.addObject("post", postService.findById(id, userDTO.getId()));
+		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(userDTO.getId(),0L));
+		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(userDTO.getId(),0));
 		return mav;
 	}
 	@GetMapping(value = "/")
-	public ModelAndView index() {
+	public ModelAndView index(HttpSession session) {
 		ModelAndView mav = new ModelAndView("web/index");
+		UserDTO userDTO = (UserDTO) session.getAttribute("user");
+		UserEntity user = userService.findById(userDTO.getId());
+		List<Long> ids = user.getListFollowing().stream().map(x->x.getFollowingId()).collect(Collectors.toList());
+		ids.add(user.getId());
+		mav.addObject("listPost", postService.findAllByUser_IdInOrderByDateCreatedDesc(ids,0, user.getId()));
+		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(user.getId(),0L));
+		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(user.getId(),0));
 		return mav;
 	}
 	@GetMapping(value = "/login")

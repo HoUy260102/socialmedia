@@ -16,8 +16,9 @@ public class NotificationConverter {
     private UserService userService;
     public NotificationDTO toNotificationDTO(NotificationEntity notificationEntity) {
         NotificationDTO notificationDTO = modelMapper.map(notificationEntity, NotificationDTO.class);
-        notificationDTO.setReceiverid(notificationEntity.getReceiver().getId());
         UserEntity userEntity = userService.findById(notificationEntity.getSenderid());
+        notificationDTO.setReceiverid(notificationEntity.getReceiver().getId());
+        notificationDTO.setLinkImgAvatar(userEntity.getLinkImgAvatar());
         notificationDTO.setFirstName(userEntity.getFirstName());
         notificationDTO.setLastName(userEntity.getLastName());
         return notificationDTO;

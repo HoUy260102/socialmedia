@@ -14,14 +14,14 @@ public class PostDTO {
     private Date date_created;
     private Long isLike;
     private Long numberOfLike;
-    private UserEntity user;
-    private List<CommentDTO> comments;
+    private UserDTO user;
+    private Page<CommentDTO> comments;
 
-    public List<CommentDTO> getComments() {
+    public Page<CommentDTO> getComments() {
         return comments;
     }
 
-    public void setComments(List<CommentDTO> comments) {
+    public void setComments(Page<CommentDTO> comments) {
         this.comments = comments;
     }
 
@@ -33,11 +33,11 @@ public class PostDTO {
         this.numberOfLike = numberOfLike;
     }
 
-    public UserEntity getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 

@@ -18,7 +18,7 @@ public class PostEntity {
     private String linkImgPost;
     @Column(name = "date_created")
     @DateTimeFormat(pattern ="yyyy-MM-dd")
-    private Date date_created;
+    private Date dateCreated;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
@@ -67,12 +67,12 @@ public class PostEntity {
         this.linkImgPost = linkimgpost;
     }
 
-    public Date getDate_created() {
-        return date_created;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
+    public void setDateCreated(Date date_created) {
+        this.dateCreated = date_created;
     }
 
     public UserEntity getUser() {

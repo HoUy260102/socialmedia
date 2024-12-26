@@ -15,12 +15,21 @@ public class NotificationEntity {
     private Long type;
     @Column(name = "seen")
     private Long seen;
+    @Column(name = "link")
+    private String link;
     @ManyToOne
     @JoinColumn(name = "receiverid")
     private UserEntity receiver;
-
     public Long getSeen() {
         return seen;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public void setSeen(Long seen) {

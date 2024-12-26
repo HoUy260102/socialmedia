@@ -241,13 +241,13 @@
                                data-placement="bottom" data-title="Notifications" role="button" aria-haspopup="true"
                                aria-expanded="false">
                                 <img src="assets/images/icons/navbar/notification.png" class="notification-bell"
-                                     alt="navbar icon"> <span class="badge badge-pill badge-primary">3</span>
+                                     alt="navbar icon"> <span class="badge badge-pill badge-primary">${notificationCnt}</span>
                             </a>
-                            <ul class="dropdown-menu notify-drop dropdown-menu-right nav-drop">
+                            <ul class="dropdown-menu notify-drop dropdown-menu-right nav-drop shadow-sm">
                                 <div class="notify-drop-title">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-6 fs-8">Notifications <span
-                                                class="badge badge-pill badge-primary ml-2">3</span></div>
+                                                class="badge badge-pill badge-primary ml-2">${notificationCnt}</span></div>
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-right">
                                             <a href="#" class="notify-right-icon">
                                                 Mark All as Read
@@ -258,120 +258,27 @@
                                 <!-- end notify title -->
                                 <!-- notify content -->
                                 <div class="drop-content">
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="assets/images/users/user-10.png"
-                                                     alt="notification user image">
+                                    <c:forEach items="${listNotification.content}" var="item">
+                                        <li ${item.seen==0?'style="background-color:#f2f4f5;cursor:pointer"':'style="cursor:pointer"'} onclick="redir(`${item.link}`, ${item.id})">
+                                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                                <div class="notify-img">
+                                                    <img src="${item.linkImgAvatar}"
+                                                         alt="notification user image">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Sean</a> <span
-                                                class="notification-type">replied to your comment on a post in </span><a
-                                                href="#" class="notification-for">PHP</a>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i
-                                                        class='bx bxs-group'></i></span> 3h
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="assets/images/users/user-7.png" alt="notification user image">
+                                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                                <a href="#" class="notification-user">${item.firstName} ${item.lastName}</a> <span
+                                                    class="notification-type">
+                                                     <c:if test="${item.type==0}">đã theo dõi bạn</c:if>
+                                                     <c:if test="${item.type==1}">đã bình luận vào bài viết của bạn </c:if>
+                                                     <c:if test="${item.type==2}">đã thích bài viết của bạn</c:if>
+                                                     </span>
+                                                <div href="#" class="notify-right-icon">
+                                                    <i class='bx bx-radio-circle-marked'></i>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Kimberly</a> <span
-                                                class="notification-type">likes your comment "I would really... </span>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i class='bx bxs-like'></i></span>
-                                                7h
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="assets/images/users/user-8.png" alt="notification user image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <span class="notification-type">10 people saw your story before it disappeared. See who saw it.</span>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i
-                                                        class='bx bx-images'></i></span> 23h
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="assets/images/users/user-11.png"
-                                                     alt="notification user image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Michelle</a> <span
-                                                class="notification-type">posted in </span><a href="#"
-                                                                                              class="notification-for">Argon
-                                            Social Design System</a>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i
-                                                        class='bx bxs-quote-right'></i></span> 1d
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="assets/images/users/user-5.png" alt="notification user image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Karen</a> <span
-                                                class="notification-type">likes your comment "Sure, here... </span>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i class='bx bxs-like'></i></span>
-                                                2d
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                            <div class="notify-img">
-                                                <img src="assets/images/users/user-12.png"
-                                                     alt="notification user image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <a href="#" class="notification-user">Irwin</a> <span
-                                                class="notification-type">posted in </span><a href="#"
-                                                                                              class="notification-for">Themeforest</a>
-                                            <a href="#" class="notify-right-icon">
-                                                <i class='bx bx-radio-circle-marked'></i>
-                                            </a>
-                                            <p class="time">
-                                                <span class="badge badge-pill badge-primary"><i
-                                                        class='bx bxs-quote-right'></i></span> 3d
-                                            </p>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    </c:forEach>
                                 </div>
                                 <div class="notify-drop-footer text-center">
                                     <a href="#">See More</a>
@@ -563,10 +470,67 @@
                                                     <div class="d-flex justify-content-between align-items-center w-100">
                                                         <span class="post-type text-muted"><a href="#"
                                                                                               class="text-gray-dark post-user-name mr-2">${user.firstName} ${user.lastName}</a></span>
+                                                        <div class="dropdown">
+                                                            <a href="#" class="post-more-settings" role="button" data-toggle="dropdown"
+                                                               id="postOptions" aria-haspopup="true" aria-expanded="false">
+                                                                <i class='bx bx-dots-horizontal-rounded'></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left post-dropdown-menu">
+                                                                <a href="#" class="dropdown-item" aria-describedby="savePost">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-bookmark-plus post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Save post</span>
+                                                                            <small id="savePost" class="form-text text-muted">Add this
+                                                                                to your saved items</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <a href="#" class="dropdown-item" aria-describedby="hidePost">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-hide post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Hide post</span>
+                                                                            <small id="hidePost" class="form-text text-muted">See fewer
+                                                                                posts like this</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <a href="#" class="dropdown-item" aria-describedby="snoozePost">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-time post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Snooze Lina for 30 days</span>
+                                                                            <small id="snoozePost" class="form-text text-muted">Temporarily
+                                                                                stop seeing posts</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <div style="cursor: pointer" onclick="deletePost(${item.id})" class="dropdown-item" aria-describedby="reportPost">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-block post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Delete</span>
+                                                                            <small id="snoozePost" class="form-text text-muted">
+                                                                                Delete post from your page</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                     <span class="d-block">${item.date_created }<i
                                                             class='bx bx-globe ml-3'></i></span>
+
                                                 </div>
                                             </div>
                                             <div class="mt-3">
@@ -602,7 +566,7 @@
                                                                     <ul class="media-list comments-list">
                                                                         <li class="media comment-form">
                                                                             <a href="#" class="pull-left">
-                                                                                <img src="assets/images/users/user-4.jpg"
+                                                                                <img src="${user.linkImgAvatar}"
                                                                                      alt="" class="img-circle">
                                                                             </a>
                                                                             <div class="media-body">
@@ -612,17 +576,15 @@
                                                                                             <div class="input-group">
                                                                                                 <input type="text"
                                                                                                        class="form-control comment-input"
-                                                                                                       placeholder="Write a comment...">
+                                                                                                       placeholder="Write a comment..." id="wcomment_${item.id}">
 
                                                                                                 <div class="input-group-btn">
-                                                                                                    <button type="button"
-                                                                                                            class="btn comment-form-btn"
-                                                                                                            data-toggle="tooltip"
-                                                                                                            data-placement="top"
-                                                                                                            title="Tooltip on top">
+                                                                                                    <div
+                                                                                                            class="btn"
+                                                                                                            onclick="creComment(${item.id})"
+                                                                                                            >
                                                                                                         <i class='bx bxs-smiley-happy'></i>
-                                                                                                    </button>
-
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -633,7 +595,7 @@
                                                                         <li class="media">
                                                                             <div class="media-body">
                                                                                 <div class="comment-see-more text-center" id="seemore_${item.id}">
-                                                                                    <button onclick="showMoreComment(${item.id},1)" type="button"
+                                                                                    <button onclick="showMoreComment(${item.id},${item.comments.number+1})" type="button"
                                                                                             class="btn btn-link fs-8">
                                                                                         See More
                                                                                     </button>
@@ -641,25 +603,25 @@
                                                                             </div>
                                                                         </li>
                                                                         <div id="content_${item.id}">
-                                                                            <c:forEach items="${item.comments}" var="icmt">
+                                                                            <c:forEach items="${item.comments.content}" var="icmt">
                                                                                 <li class="media">
-                                                                                <a href="#" class="pull-left">
-                                                                                    <img src="${icmt.linkImgAvatar}"
-                                                                                         alt="" class="img-circle">
-                                                                                </a>
-                                                                                <div class="media-body">
-                                                                                    <div class="d-flex justify-content-between align-items-center w-100">
-                                                                                        <strong class="text-gray-dark"><a
-                                                                                                href="#" class="fs-8">${icmt.firstName} ${icmt.lastName}</a></strong>
-                                                                                        <a href="#"><i
-                                                                                                class='bx bx-dots-horizontal-rounded'></i></a>
-                                                                                    </div>
-                                                                                    <p class="fs-8 pt-2">
-                                                                                        ${icmt.text}
-                                                                                    </p>
+                                                                                    <a href="#" class="pull-left">
+                                                                                        <img src="${icmt.linkImgAvatar}"
+                                                                                             alt="" class="img-circle">
+                                                                                    </a>
 
-                                                                                </div>
-                                                                            </li>
+                                                                                    <div class="media-body">
+                                                                                        <div class="d-flex justify-content-between align-items-center w-100">
+                                                                                            <strong class="text-gray-dark"><a
+                                                                                                    href="#" class="fs-8">${icmt.firstName} ${icmt.lastName}</a></strong>
+                                                                                            <a href="#"><i
+                                                                                                    class='bx bx-dots-horizontal-rounded'></i></a>
+                                                                                        </div>
+                                                                                        <p class="fs-8 pt-2">
+                                                                                            ${icmt.text}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </li>
                                                                             </c:forEach>
                                                                         </div>
                                                                     </ul>
@@ -711,6 +673,7 @@
         </div>
     </div>
 </div>
+
 <%--Toast Noti--%>
 <div id="toast" class="toast position-fixed" style="z-index: 999999;right: 0px;top:0px" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body">
@@ -728,13 +691,6 @@
 <!-- Optional -->
 <script src="assets/js/app.js"></script>
 <script src="assets/js/components/components.js"></script>
-<script>
-    function open() {
-        console.log("hello");
-    }
-
-    open();
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
@@ -809,6 +765,7 @@
 
                 }
             });
+
         }
     }
     function showMoreComment(postId, page) {
@@ -816,14 +773,87 @@
             type : "get",
             url : "/api/comment?postId="+postId+"&page="+page,
             success : function(response) {
-                var data = JSON.parse(response);
+                var data = response.content;
+                var numbernext = response.number+1;
                 var seemore = document.getElementById("seemore_"+postId);
+                var content = document.getElementById("content_"+postId);
+                seemore.innerHTML = `<button onclick="showMoreComment(`+postId+`,`+numbernext+`)" type="button"
+                                                                                            class="btn btn-link fs-8">
+                                                                                        See More
+                                                                                    </button>`;
+                data.forEach(function (item) {
+                    var limedia = document.createElement("li");
+                    limedia.classList.add("media");
+                    var tem = `<a href="#" class="pull-left">
+                                  <img src="`+item.linkImgAvatar+`"
+                                  alt="" class="img-circle">
+                               </a>
+                               <div class="media-body">
+                                 <div class="d-flex justify-content-between align-items-center w-100">
+                                    <strong class="text-gray-dark"><a
+                                       href="#" class="fs-8">`+item.firstName+` `+item.lastName+`</a></strong>
+                                           <a href="#"><i class='bx bx-dots-horizontal-rounded'></i></a>
+                                 </div>
+                                 <p class="fs-8 pt-2">`
+                                    +item.text+`
+                                 </p>
+                               </div>`;
+                    limedia.innerHTML = tem;
+                    content.appendChild(limedia);
+                })
             },
             error: function (response) {
 
             }
         });
+    }
+    function creComment(postId) {
+        var text = document.getElementById("wcomment_"+postId);
+        var cmt = {
+            text: text.value,
+            date_created: new Date(),
+            post: {
+                id:postId
+            },
+            user: {
+                id: ${user.id}
+            }
+        };
+        $.ajax({
+            type : "post",
+            url : "/api/comment",
+            data : JSON.stringify(cmt),
+            contentType:"application/json",
+            dataType:"JSON",
+            success : function(response) {
+            },
+            error: function (response) {
 
+            }
+        });
+        text.value='';
+    }
+    function deletePost(postId) {
+        $.ajax({
+            type : "delete",
+            url : "/api/post/"+postId,
+            success : function(response) {
+            },
+            error: function (response) {
+
+            }
+        });
+        window.location.reload();
+    }
+    function redir(url, id) {
+        $.ajax({
+            type: "put",
+            url: "/api/notification/"+id,
+            success: function (response) {
+
+            }
+        });
+        window.location = url;
     }
 </script>
 </body>

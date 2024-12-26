@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CommentService {
     void save(CommentEntity comment);
-    List<CommentDTO> findByPostIdPaging(Long postId, int page);
+    Page<CommentDTO> findByPostIdPaging(Long postId, int page);
 }

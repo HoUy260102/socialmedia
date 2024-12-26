@@ -4,12 +4,29 @@ import java.util.Date;
 
 public class NotificationDTO {
     private Long id;
+    private String linkImgAvatar;
     private Long senderid;
     private Long receiverid;
     private String firstName;
     private String lastName;
     private Long type;
     private Long seen;
+    private String link;
+    public String getLinkImgAvatar() {
+        return linkImgAvatar;
+    }
+
+    public void setLinkImgAvatar(String linkImgAvatar) {
+        this.linkImgAvatar = linkImgAvatar;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public String getFirstName() {
         return firstName;

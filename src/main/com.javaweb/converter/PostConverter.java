@@ -15,9 +15,13 @@ public class PostConverter {
     @Autowired
     private LikeService likeService;
     @Autowired
+    private UserConverter userConverter;
+    @Autowired
     private CommentService commentService;
     public PostDTO toPostDTO(PostEntity postEntity, Long userId) {
         PostDTO postDTO = modelMapper.map(postEntity, PostDTO.class);
+        postDTO.setDate_created(postEntity.getDateCreated());
+        postDTO.setUser(userConverter.toUserDTO(postEntity.getUser()));
         postDTO.setNumberOfLike(likeService.countLikeByPostId(postEntity.getId()));
         postDTO.setIsLike(likeService.findByUserIdAndPostId(userId, postDTO.getId())!=null?1L:0L);
         postDTO.setComments(commentService.findByPostIdPaging(postEntity.getId(), 0));
