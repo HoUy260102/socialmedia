@@ -1,7 +1,9 @@
 package com.javaweb.service.Impl;
 
+import com.javaweb.converter.UserConverter;
 import com.javaweb.converter.UserSearchResponserConverter;
 import com.javaweb.entity.UserEntity;
+import com.javaweb.model.dto.UserDTO;
 import com.javaweb.model.dto.UserSearchResponseDTO;
 import com.javaweb.repository.UserRepository;
 import com.javaweb.service.UserService;
@@ -11,11 +13,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserConverter userConverter;
     @Autowired
     private UserSearchResponserConverter userSearchResponserConverter;
     @Override
@@ -41,5 +46,11 @@ public class UserServiceImpl implements UserService {
             result.add(userSearchResponseDTO);
         }
         return result;
+    }
+
+    @Override
+    public List<UserDTO> findAllByIdIn(UserEntity userEntity) {
+        List<UserEntity> userEntities = userRepository.findAllByIdIn(userEntity.getListContact().stream().map(x->x.getContactId()).collect(Collectors.toList()));
+        return userEntities.stream().map(x->userConverter.toUserDTO(x)).collect(Collectors.toList());
     }
 }

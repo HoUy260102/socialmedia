@@ -1,11 +1,14 @@
 package com.javaweb.controller.web;
 
 import com.javaweb.converter.UserConverter;
+import com.javaweb.entity.ContactEntity;
 import com.javaweb.entity.FollowingEntity;
 import com.javaweb.entity.UserEntity;
+import com.javaweb.model.dto.MessageDTO;
 import com.javaweb.model.dto.MyUserDetail;
 import com.javaweb.model.dto.UserDTO;
 import com.javaweb.model.dto.UserSearchResponseDTO;
+import com.javaweb.repository.ContactRepository;
 import com.javaweb.repository.NotificationRepository;
 import com.javaweb.security.utils.SecurityUtils;
 import com.javaweb.service.*;
@@ -26,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -251,4 +255,27 @@ public class HomeController {
 		session.removeAttribute("user");
 		response.sendRedirect("login");
 	}
+	@Autowired
+	private MessageService messageService;
+	@Autowired
+	private ContactRepository contactRepository;
+	@GetMapping("/message/{id}")
+	public ModelAndView message(@PathVariable Long id, HttpSession session) {
+		ModelAndView mav = new ModelAndView("web/message");
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		UserEntity userEntity = userService.findById(userDTO.getId());
+		if (contactRepository.findByUser_IdAndContactId(userDTO.getId(), id)==null) {
+			ContactEntity contact = new ContactEntity();
+			contact.setUser(userEntity);
+			contact.setContactId(id);
+			contactRepository.save(contact);
+		}
+		mav.addObject("listContact", userService.findAllByIdIn(userEntity));
+		mav.addObject("listMes", messageService.findAllMes(((UserDTO)session.getAttribute("user")).getId(),id));
+		mav.addObject("receiver", userConverter.toUserDTO(userService.findById(id)));
+		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(((UserDTO)session.getAttribute("user")).getId(),0L));
+		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(((UserDTO)session.getAttribute("user")).getId(),0));
+		return mav;
+	}
+
 }

@@ -49,6 +49,36 @@ public class UserEntity {
     List<LikeEntity> listLike ;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     List<CommentEntity> listComment;
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
+    List<MessageEntity> listMesReceiver;
+    @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
+    List<MessageEntity> listMesSender;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    List<ContactEntity> listContact;
+
+    public List<ContactEntity> getListContact() {
+        return listContact;
+    }
+
+    public void setListContact(List<ContactEntity> listContact) {
+        this.listContact = listContact;
+    }
+
+    public List<MessageEntity> getListMesReceiver() {
+        return listMesReceiver;
+    }
+
+    public void setListMesReceiver(List<MessageEntity> listMesReceiver) {
+        this.listMesReceiver = listMesReceiver;
+    }
+
+    public List<MessageEntity> getListMesSender() {
+        return listMesSender;
+    }
+
+    public void setListMesSender(List<MessageEntity> listMesSender) {
+        this.listMesSender = listMesSender;
+    }
 
     public List<CommentEntity> getListComment() {
         return listComment;

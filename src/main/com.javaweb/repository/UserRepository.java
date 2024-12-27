@@ -9,4 +9,5 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity,Long>, CustomizedUserRepository {
     public UserEntity findByEmail(String email);
     public List<UserEntity> findAllByIdNot(Long id);
+    List<UserEntity> findAllByIdIn(List<Long> ids);
 }
