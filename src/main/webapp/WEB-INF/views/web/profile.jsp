@@ -113,7 +113,7 @@
                             <a href="/message/${user.id}" class="nav-link nav-links"
                                data-placement="bottom" data-title="Messages" role="button" aria-haspopup="true"
                                aria-expanded="false">
-                                <img src="assets/images/icons/navbar/message.png" class="message-dropdown"
+                                <img src="/assets/images/icons/navbar/message.png" class="message-dropdown"
                                      alt="navbar icon"> <span class="badge badge-pill badge-primary"></span>
                             </a>
                         </li>
@@ -403,7 +403,7 @@
                                                 </div>
 
                                                 <a href="javascript:void(0)" class="post-card-buttons"
-                                                   ><i class='bx bx-message-rounded mr-2'></i> 5</a>
+                                                   ><i class='bx bx-message-rounded mr-2'></i></a>
 
                                             </div>
                                             <div class="border-top pt-3 hide-comments" style="">
@@ -430,7 +430,7 @@
                                                                                                 <div class="input-group-btn">
                                                                                                     <div
                                                                                                             class="btn"
-                                                                                                            onclick="creComment(${item.id})"
+                                                                                                            onclick="creComment(${item.id}, ${following.id})"
                                                                                                             >
                                                                                                         <i class='bx bxs-smiley-happy'></i>
                                                                                                     </div>
@@ -618,9 +618,11 @@
             toastmes.textContent = notification.firstName + ' ' + notification.lastName + ' đã bắt đầu theo dõi bạn';
         }
         else if (notification.type==1) {
+            takeaction.href = notification.link;
             toastmes.textContent = notification.firstName + ' ' + notification.lastName + ' đã bình luận vào bài viết của bạn';
         }
         else {
+            takeaction.href = notification.link;
             toastmes.textContent = notification.firstName+' '+notification.lastName+' đã thích bài viết của bạn';
         }
         const myToastEl = document.getElementById('toast');
@@ -727,7 +729,7 @@
             }
         });
     }
-    function creComment(postId) {
+    function creComment(postId, receiverId) {
         var text = document.getElementById("wcomment_"+postId);
         var cmt = {
             text: text.value,
@@ -759,25 +761,27 @@
             },
             type: 1,
             seen:0,
-            link:'/post/'+postid
+            link:'/post/'+postId
         };
         if (notification.senderid!=notification.receiver.id) {
             stompClient.send("/app/notification.private", {}, JSON.stringify(notification));
             event.preventDefault();
         }
-        $.ajax({
-            type : "post",
-            url : "/api/notification",
-            data: JSON.stringify(notification),
-            contentType:"application/json",
-            dataType:"JSON",
-            success : function(response) {
+        if (${user.id}!=receiverId) {
+            $.ajax({
+                type: "post",
+                url: "/api/notification",
+                data: JSON.stringify(notification),
+                contentType: "application/json",
+                dataType: "JSON",
+                success: function (response) {
 
-            },
-            error: function (response) {
+                },
+                error: function (response) {
 
-            }
-        });
+                }
+            });
+        }
     }
     function redir(url, id) {
         $.ajax({

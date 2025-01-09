@@ -455,9 +455,11 @@
       toastmes.textContent = notification.firstName + ' ' + notification.lastName + ' đã bắt đầu theo dõi bạn';
     }
     else if (notification.type==1) {
+      takeaction.href = notification.link;
       toastmes.textContent = notification.firstName + ' ' + notification.lastName + ' đã bình luận vào bài viết của bạn';
     }
     else {
+      takeaction.href = notification.link;
       toastmes.textContent = notification.firstName+' '+notification.lastName+' đã thích bài viết của bạn';
     }
     const myToastEl = document.getElementById('toast');
