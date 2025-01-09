@@ -1,15 +1,10 @@
 package com.javaweb.controller.web;
 
+import com.javaweb.Utils.SessionUtils;
 import com.javaweb.converter.UserConverter;
-import com.javaweb.entity.ContactEntity;
-import com.javaweb.entity.FollowingEntity;
-import com.javaweb.entity.UserEntity;
-import com.javaweb.model.dto.MessageDTO;
-import com.javaweb.model.dto.MyUserDetail;
-import com.javaweb.model.dto.UserDTO;
-import com.javaweb.model.dto.UserSearchResponseDTO;
-import com.javaweb.repository.ContactRepository;
-import com.javaweb.repository.NotificationRepository;
+import com.javaweb.entity.*;
+import com.javaweb.model.dto.*;
+import com.javaweb.repository.*;
 import com.javaweb.security.utils.SecurityUtils;
 import com.javaweb.service.*;
 import com.javaweb.service.Impl.CustomUserDetailService;
@@ -28,8 +23,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +51,7 @@ public class HomeController {
 	@GetMapping(value = "/myprofile")
 	public ModelAndView myProfile(HttpSession session) {
 		ModelAndView mav = new ModelAndView("web/myprofile");
+		SessionUtils.setSession(session);
 		mav.addObject("listPost", postService.findAllByUser_IdAndOrderByDate_createdDesc(((UserDTO)session.getAttribute("user")).getId()));
 		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(((UserDTO)session.getAttribute("user")).getId(),0L));
 		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(((UserDTO)session.getAttribute("user")).getId(),0));
@@ -61,6 +60,7 @@ public class HomeController {
 	@GetMapping(value = "/edit-profile")
 	public ModelAndView editMyProfile(@ModelAttribute UserEntity userEntity,HttpSession session) throws Exception {
 		ModelAndView mav = new ModelAndView("web/edit");
+		SessionUtils.setSession(session);
 		userEntity = userService.findByEmail(((UserDTO) session.getAttribute("user")).getEmail());
 		mav.addObject("userEdit", userEntity);
 		return mav;
@@ -68,6 +68,7 @@ public class HomeController {
 	@GetMapping("/profile/{id}")
 	public ModelAndView profile(@PathVariable Long id, HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView("web/profile");
+		SessionUtils.setSession(session);
 		UserDTO userDTO = (UserDTO) session.getAttribute("user");
 		FollowingEntity followingEntity = followingService.findByFollowingIdAndUser_Id(id,userDTO.getId());
 		mav.addObject("following", userConverter.toUserDTO((userService.findById(id))));
@@ -80,6 +81,7 @@ public class HomeController {
 	@GetMapping("/post/{id}")
 	public ModelAndView post(@PathVariable Long id, HttpSession session) {
 		ModelAndView mav = new ModelAndView("web/post");
+		SessionUtils.setSession(session);
 		UserDTO userDTO = (UserDTO) session.getAttribute("user");
 		mav.addObject("post", postService.findById(id, userDTO.getId()));
 		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(userDTO.getId(),0L));
@@ -89,6 +91,7 @@ public class HomeController {
 	@GetMapping(value = "/")
 	public ModelAndView index(HttpSession session) {
 		ModelAndView mav = new ModelAndView("web/index");
+		SessionUtils.setSession(session);
 		UserDTO userDTO = (UserDTO) session.getAttribute("user");
 		UserEntity user = userService.findById(userDTO.getId());
 		List<Long> ids = user.getListFollowing().stream().map(x->x.getFollowingId()).collect(Collectors.toList());
@@ -98,11 +101,16 @@ public class HomeController {
 		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(user.getId(),0));
 		return mav;
 	}
+	@Autowired
+	private SocialTrafficRepository socialTrafficRepository;
 	@GetMapping(value = "/login")
 	public ModelAndView login(Model model,@RequestParam(name = "mes", required = false) String mes, HttpServletResponse response, HttpServletRequest request, HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView("login");
-		if (mes!=null&&mes.equals("0")) {
+ 		if (mes!=null&&mes.equals("0")) {
 			mav.addObject("mes","Mật khẩu hoặc tài khoản không chính xác");
+		}
+		else if (mes!=null&&mes.equals("2")) {
+			mav.addObject("mes","Tài khoản bị khóa");
 		}
 		else if (mes!=null&&mes.equals("1")) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -111,8 +119,17 @@ public class HomeController {
 			session.setAttribute("user",myUserDetail.getUserDTO());
 			session.removeAttribute("username");
 			if (roles.contains("ROLE_USER")) {
+                Date d = new Date();
+                Date tday = new Date(d.getYear(),d.getMonth(), d.getDay()+5);
+                if (socialTrafficRepository.findByUserIdAndDay(myUserDetail.getUserDTO().getId(),tday)==null) {
+                    SocialTrafficEntity socialTrafficEntity = new SocialTrafficEntity();
+                    socialTrafficEntity.setDay(tday);
+                    socialTrafficEntity.setUserId(myUserDetail.getUserDTO().getId());
+                    socialTrafficRepository.save(socialTrafficEntity);
+                }
 				response.sendRedirect("/");
 			}
+			else response.sendRedirect("/admin?key=&page=1");
 		}
 		return mav;
 	}
@@ -123,6 +140,7 @@ public class HomeController {
 	@GetMapping("/following")
 	public ModelAndView following(HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		ModelAndView mav = new ModelAndView("/web/following");
+		SessionUtils.setSession(session);
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
 		mav.addObject("listFollowing", followingService.getFollowingPage(userDTO.getId(),1L));
 		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(((UserDTO)session.getAttribute("user")).getId(),0L));
@@ -132,6 +150,7 @@ public class HomeController {
 	@GetMapping("/follower")
 	public ModelAndView follower(HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		ModelAndView mav = new ModelAndView("/web/follower");
+		SessionUtils.setSession(session);
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
 		mav.addObject("listFollower", followerService.getFollowerPage(userDTO.getId(),1L));
 		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(((UserDTO)session.getAttribute("user")).getId(),0L));
@@ -141,6 +160,7 @@ public class HomeController {
 	@GetMapping("/searchuser")
 	public ModelAndView searchUser(@RequestParam("key") String key, HttpSession session) {
 		ModelAndView mav = new ModelAndView("web/searchuser");
+		SessionUtils.setSession(session);
 		UserDTO userDTO = (UserDTO) session.getAttribute("user");
 		List<UserSearchResponseDTO> result = userService.findAllByKey(key,userDTO.getId());
 		mav.addObject("keyid",key);
@@ -157,6 +177,10 @@ public class HomeController {
 		if (photo!=null&&photo.getOriginalFilename()!="") {
 			try {
 				ServletContext servletContext = request.getServletContext();
+				if (!userEdit.getLinkImgAvatar().equals("/assets/images/avatar/avatar-trang.jpg")) {
+					String photoPathdele = servletContext.getRealPath(userEdit.getLinkImgAvatar());
+					Files.delete(Paths.get(photoPathdele));
+				}
 				String photoPath = servletContext.getRealPath("/assets/images/avatar/"+photo.getOriginalFilename());
 				photo.transferTo(new File(photoPath));
 				userEdit.setLinkImgAvatar("/assets/images/avatar/"+photo.getOriginalFilename());
@@ -262,6 +286,7 @@ public class HomeController {
 	@GetMapping("/message/{id}")
 	public ModelAndView message(@PathVariable Long id, HttpSession session) {
 		ModelAndView mav = new ModelAndView("web/message");
+		SessionUtils.setSession(session);
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
 		UserEntity userEntity = userService.findById(userDTO.getId());
 		if (contactRepository.findByUser_IdAndContactId(userDTO.getId(), id)==null) {
@@ -276,6 +301,17 @@ public class HomeController {
 		mav.addObject("notificationCnt", notificationRepository.countAllByReceiver_IdAndSeen(((UserDTO)session.getAttribute("user")).getId(),0L));
 		mav.addObject("listNotification", notificationService.findAllByReceiver_IdOrderByIdDesc(((UserDTO)session.getAttribute("user")).getId(),0));
 		return mav;
+	}
+	@Autowired
+	private PostReportRepository postReportRepository;
+	@PostMapping("/repostPost")
+	public void RepostPost(@RequestParam("textReport") String textReport, @RequestParam("idPost") Long postReportId, @RequestParam("idUser") Long userReportId, HttpServletResponse response) throws Exception{
+		PostReportEntity postReportEntity = new PostReportEntity();
+		postReportEntity.setPostId(postReportId);
+		postReportEntity.setUserId(userReportId);
+		postReportEntity.setText(textReport);
+		postReportRepository.save(postReportEntity);
+		response.sendRedirect("/");
 	}
 
 }

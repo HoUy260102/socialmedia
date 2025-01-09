@@ -30,6 +30,7 @@
             color: #007bff;
         }
     </style>
+
 </head>
 
 <body class="newsfeed">
@@ -623,6 +624,50 @@
                                                         <span class="post-type text-muted"><a href="#"
                                                                                               class="text-gray-dark post-user-name mr-2">${item.user.firstName} ${item.user.lastName}</a></span>
 
+                                                        <div class="dropdown">
+                                                            <a href="#" class="post-more-settings" role="button" data-toggle="dropdown"
+                                                               id="postOptions" aria-haspopup="true" aria-expanded="false">
+                                                                <i class='bx bx-dots-horizontal-rounded'></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left post-dropdown-menu">
+                                                                <a href="#" class="dropdown-item" aria-describedby="savePost">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-bookmark-plus post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Save post</span>
+                                                                            <small id="savePost" class="form-text text-muted">Add this
+                                                                                to your saved items</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <a href="#" onclick="openModalReport(${item.id})" class="dropdown-item">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-hide post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Report</span>
+                                                                            <small id="hidePost" class="form-text text-muted">Report this post</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <a href="#" class="dropdown-item" aria-describedby="snoozePost">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-time post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Snooze Lina for 30 days</span>
+                                                                            <small id="snoozePost" class="form-text text-muted">Temporarily
+                                                                                stop seeing posts</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                     <span class="d-block">${item.date_created }<i
                                                             class='bx bx-globe ml-3'></i></span>
@@ -858,7 +903,34 @@
         </div>
     </div>
 </div>
+<%--Modal Repost--%>
+<div id="modalReport" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Form Report</h4>
+            </div>
+            <div class="modal-body">
+                <form action="repostPost" method="post">
+                    <div class="row">
+                        <label>Reasons to report:</label>
+                        <textarea class="form-control" id="" name="textReport" rows="10"
+                                  placeholder="Type your reasons..."></textarea>
+                    </div>
+                    <input type="text" name="idPost" id="idPostReport" hidden>
+                    <input type="text" name="idUser" id="idUserReport" hidden>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">Send Report</button>
+                        <%--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
 <!-- Core -->
 <script src="assets/js/jquery/jquery-3.3.1.min.js"></script>
 <script src="assets/js/popper/popper.min.js"></script>
@@ -960,19 +1032,21 @@
                 stompClient.send("/app/notification.private", {}, JSON.stringify(notification));
                 event.preventDefault();
             }
-            $.ajax({
-                type : "post",
-                url : "/api/notification",
-                data: JSON.stringify(notification),
-                contentType:"application/json",
-                dataType:"JSON",
-                success : function(response) {
+            if (userid!=receiverId) {
+                $.ajax({
+                    type : "post",
+                    url : "/api/notification",
+                    data: JSON.stringify(notification),
+                    contentType:"application/json",
+                    dataType:"JSON",
+                    success : function(response) {
 
-                },
-                error: function (response) {
+                    },
+                    error: function (response) {
 
-                }
-            });
+                    }
+                });
+            }
         }
     }
     function showMoreComment(postId, page) {
@@ -1052,19 +1126,22 @@
             stompClient.send("/app/notification.private", {}, JSON.stringify(notification));
             event.preventDefault();
         }
-        $.ajax({
-            type : "post",
-            url : "/api/notification",
-            data: JSON.stringify(notification),
-            contentType:"application/json",
-            dataType:"JSON",
-            success : function(response) {
+        if (userid!=receiverId) {
 
-            },
-            error: function (response) {
+            $.ajax({
+                type: "post",
+                url: "/api/notification",
+                data: JSON.stringify(notification),
+                contentType: "application/json",
+                dataType: "JSON",
+                success: function (response) {
 
-            }
-        });
+                },
+                error: function (response) {
+
+                }
+            });
+        }
     }
     function loadMorePost(page) {
         $.ajax({
@@ -1088,6 +1165,50 @@
                                                     <div class="d-flex justify-content-between align-items-center w-100">
                                                         <span class="post-type text-muted"><a href="#"
                                                                                               class="text-gray-dark post-user-name mr-2">`+item.user.firstName+` `+item.user.lastName+`</a></span>
+                                                        <div class="dropdown">
+                                                            <a href="#" class="post-more-settings" role="button" data-toggle="dropdown"
+                                                               id="postOptions" aria-haspopup="true" aria-expanded="false">
+                                                                <i class='bx bx-dots-horizontal-rounded'></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left post-dropdown-menu">
+                                                                <a href="#" class="dropdown-item" aria-describedby="savePost">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-bookmark-plus post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Save post</span>
+                                                                            <small id="savePost" class="form-text text-muted">Add this
+                                                                                to your saved items</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <a href="#" onclick="openModalReport(`+item.id+`)" class="dropdown-item" aria-describedby="hidePost">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-hide post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Report</span>
+                                                                            <small id="hidePost" class="form-text text-muted">Report this post</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <a href="#" class="dropdown-item" aria-describedby="snoozePost">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                            <i class='bx bx-time post-option-icon'></i>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <span class="fs-9">Snooze Lina for 30 days</span>
+                                                                            <small id="snoozePost" class="form-text text-muted">Temporarily
+                                                                                stop seeing posts</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                     <span class="d-block">`+item.date_created+`<i
@@ -1098,7 +1219,7 @@
                                                 <p>`+item.text+`</p>
                                             </div>
                                             <div class="d-block mt-3">`;
-                    if (item.linkImgPost!='') tem+=`<img src="`+item.linkImgPost+`" class="w-100 mb-3"
+                    if (item.linkImgPost!=null) tem+=`<img src="`+item.linkImgPost+`" class="w-100 mb-3"
                                                      alt="post image">`;
                     tem+=`</div>
                     <div class="mb-2">
@@ -1192,6 +1313,15 @@
             }
         });
         window.location = url;
+    }
+    function openModalReport(idPost, idUser) {
+        var modalre = document.getElementById("modalReport");
+        var idPostRe = document.getElementById("idPostReport");
+        idPostRe.value = idPost;
+        var idUserRe = document.getElementById("idUserReport");
+        idUserRe.value = ${user.id};
+        const modal = new bootstrap.Modal(modalre);
+        modal.show();
     }
 </script>
 

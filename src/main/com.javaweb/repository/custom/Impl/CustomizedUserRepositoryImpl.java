@@ -18,8 +18,8 @@ public class CustomizedUserRepositoryImpl implements CustomizedUserRepository {
     private EntityManager entityManager;
     @Override
     public List<UserEntity> findAllByKey(String key, Long userId) {
-        String sql = "select u.id, u.email,u.password, u.firstname, u.lastname, u.dateofbirth, u.linkimgavatar, u.work, u.live, u.phonenumber, u.active, u.role from user u \n" +
-                "where u.id != "+userId+" and (concat(u.firstname,' ',u.lastname) like N'%"+key+"%' or u.email like N'%"+key+"%')";
+        String sql = "select u.id, u.email,u.password, u.firstname, u.lastname, u.dateofbirth, u.linkimgavatar, u.work, u.live, u.phonenumber, u.active, u.role, u.enable from user u \n" +
+                "where u.role='USER' and u.id != "+userId+" and (concat(u.firstname,' ',u.lastname) like N'%"+key+"%' or u.email like N'%"+key+"%')";
         Query query = entityManager.createNativeQuery(sql, UserEntity.class);
         return query.getResultList();
     }

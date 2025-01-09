@@ -1,11 +1,25 @@
 package com.javaweb.entity;
 
+import com.javaweb.model.dto.PostCountDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
+@NamedNativeQuery(name = "PostEntity.getCountPostPerMonthByYear",
+        query = "SELECT m.month as month, ifnull(te.count,0) as count " +
+                "    FROM months as m  " +
+                "    left join ( " +
+                "            select month(p.date_created) as month, count(p.id) as count " +
+                "            FROM post as p   " +
+                "            where year(p.date_created)=?1   " +
+                "            group by month(p.date_created) " +
+                "        ) as te on m.month=te.month",
+        resultSetMapping = "Mapping.PostCountDTO")
+@SqlResultSetMapping(name = "Mapping.PostCountDTO",
+        classes = @ConstructorResult(targetClass = PostCountDTO.class,
+                columns = {@ColumnResult(name = "month", type = Long.class),
+                        @ColumnResult(name = "count", type = Long.class)}))
 @Entity
 @Table(name = "post")
 public class PostEntity {

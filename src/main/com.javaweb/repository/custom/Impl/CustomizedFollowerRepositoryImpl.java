@@ -20,9 +20,9 @@ public class CustomizedFollowerRepositoryImpl implements CustomizedFollowerRepos
     private UserConverter userConverter;
     @Override
     public List<UserEntity> getFollowerPage(Long userId, Long page) {
-        String sql = "select u.id, u.email,u.password, u.firstname, u.lastname, u.dateofbirth, u.linkimgavatar, u.work, u.live, u.phonenumber, u.active, u.role from follower f\n" +
+        String sql = "select u.id, u.email,u.password, u.firstname, u.lastname, u.dateofbirth, u.linkimgavatar, u.work, u.live, u.phonenumber, u.active, u.role, u.enable from follower f\n" +
                 "join user u on u.id = f.followerid\n"+
-                "where f.user_id ="+userId+"\n" +
+                "where u.role='USER' and f.user_id ="+userId+"\n" +
                 "LIMIT "+(page-1)*2+",2";
         Query query = entityManager.createNativeQuery(sql, UserEntity.class);
         return query.getResultList();
@@ -30,9 +30,9 @@ public class CustomizedFollowerRepositoryImpl implements CustomizedFollowerRepos
 
     @Override
     public List<UserEntity> getFollowerByKey(String key, Long userId) {
-        String sql = "select u.id, u.email,u.password, u.firstname, u.lastname, u.dateofbirth, u.linkimgavatar, u.work, u.live, u.phonenumber, u.active, u.role from follower f\n" +
+        String sql = "select u.id, u.email,u.password, u.firstname, u.lastname, u.dateofbirth, u.linkimgavatar, u.work, u.live, u.phonenumber, u.active, u.role, u.enable from follower f\n" +
                 "join user u on u.id = f.followerid\n" +
-                "where f.user_id = "+userId+" and (concat(u.firstname,' ',u.lastname) like N'%"+key+"%' or u.email like N'%"+key+"%')";
+                "where u.role='USER' and f.user_id = "+userId+" and (concat(u.firstname,' ',u.lastname) like N'%"+key+"%' or u.email like N'%"+key+"%')";
         Query query = entityManager.createNativeQuery(sql, UserEntity.class);
         return query.getResultList();
     }

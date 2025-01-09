@@ -37,6 +37,17 @@ public class UserEntity {
     private int active;
     @Column(name = "role")
     private String role;
+    @Column(name = "enable")
+    private Boolean enable;
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     List<FollowingEntity> listFollowing;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

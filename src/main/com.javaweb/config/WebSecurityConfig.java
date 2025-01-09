@@ -66,7 +66,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         String username = request.getParameter("username");
                         HttpSession session = request.getSession();
                         session.setAttribute("username", username);
-                        response.sendRedirect("/login?mes=0");
+                        if (e.getMessage().equals("User is disabled")) response.sendRedirect("/login?mes=2");
+                        else  response.sendRedirect("/login?mes=0");
                     }
                 }).and()
                 .logout().logoutUrl("/logout").deleteCookies("JSESSIONID")
@@ -77,7 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/assets/**");
+                .antMatchers("/resources/**", "/assets/**","/assetsadmin/**");
     }
 //    @Bean
 //    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){

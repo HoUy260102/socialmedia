@@ -196,7 +196,7 @@
                             <a href="/message/${user.id}" class="nav-link nav-links"
                                data-placement="bottom" data-title="Messages" role="button" aria-haspopup="true"
                                aria-expanded="false">
-                                <img src="assets/images/icons/navbar/message.png" class="message-dropdown"
+                                <img src="/assets/images/icons/navbar/message.png" class="message-dropdown"
                                      alt="navbar icon"> <span class="badge badge-pill badge-primary"></span>
                             </a>
                         </li>

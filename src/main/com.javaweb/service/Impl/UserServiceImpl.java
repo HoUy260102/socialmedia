@@ -8,6 +8,9 @@ import com.javaweb.model.dto.UserSearchResponseDTO;
 import com.javaweb.repository.UserRepository;
 import com.javaweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -52,5 +55,19 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> findAllByIdIn(UserEntity userEntity) {
         List<UserEntity> userEntities = userRepository.findAllByIdIn(userEntity.getListContact().stream().map(x->x.getContactId()).collect(Collectors.toList()));
         return userEntities.stream().map(x->userConverter.toUserDTO(x)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<UserDTO> findAllPaging(int page) {
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<UserEntity> userEntities = userRepository.findAll(pageable);
+        return userEntities.map(x->userConverter.toUserDTO(x));
+    }
+
+    @Override
+    public Page<UserDTO> findAllPagingLike(int page, String key) {
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<UserEntity> userEntities = userRepository.findAllByEmailContainingOrFirstNameContainingOrLastNameContaining(key, key, key, pageable);
+        return userEntities.map(x->userConverter.toUserDTO(x));
     }
 }

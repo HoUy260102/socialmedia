@@ -31,7 +31,7 @@ public class CustomUserDetailService implements UserDetailsService {
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_"+userDTO.getRole()));
-        MyUserDetail myUserDetail = new MyUserDetail(name, userEntity.getPassword(),true,true,true,true,authorities);
+        MyUserDetail myUserDetail = new MyUserDetail(name, userEntity.getPassword(),userEntity.getEnable(),true,true,true,authorities);
         BeanUtils.copyProperties(userDTO, myUserDetail);
         myUserDetail.setUserDTO(userDTO);
         return myUserDetail;

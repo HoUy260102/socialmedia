@@ -1,11 +1,16 @@
 package com.javaweb.model.dto;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class UserDTO {
     private Long id;
     private String email;
+    private String password;
     private String firstName;
     private String lastName;
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private Date dateOfBirth;
     private String linkImgAvatar;
     private String work;
@@ -13,6 +18,24 @@ public class UserDTO {
     private String phoneNumber;
     private int active;
     private String role;
+    private Boolean enable;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
+
     public String getRole() {
         return role;
     }
